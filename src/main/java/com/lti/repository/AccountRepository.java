@@ -8,10 +8,12 @@ public interface AccountRepository {
 	
 	//getAccountNumber
 	
-	public String accountStatus(int accountNummber);
+	public String getAccountStatus(int accountNumber);
 	
-	public double accountBalance(int accountNummber);
+	public double getAccountBalance(int accountNumber);
 	
-	public boolean isUserValid(int AccountNummber);
+	public boolean isUserValid(int accountNumber);
+	
+	public Account getAccountDetails(int accountNumber);
 	
 }

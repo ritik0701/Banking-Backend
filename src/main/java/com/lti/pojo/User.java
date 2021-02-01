@@ -1,45 +1,83 @@
 package com.lti.pojo;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import java.io.Serializable;
+import javax.persistence.*;
+import java.util.List;
+
+
+/**
+ * The persistent class for the USERS database table.
+ * 
+ */
 @Entity
-@Table(name="user")
-public class User {
+@Table(name="USERS")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name="user_id",length=50)
-	private int User_Id; 
-	@Column(name="pass",nullable=false)
-	private String Pass;
-	@Column(name="acc_no",nullable=false)
-	private int Acc_No;
-	@Column(name="profile_pass",nullable=false)
-	private String Profile_Pass;
-	public int getUser_Id() {
-		return User_Id;
+	@SequenceGenerator(name="USERS_USERID_GENERATOR", sequenceName="USER_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERS_USERID_GENERATOR")
+	@Column(name="USER_ID")
+	private long userId;
+
+	private String pass;
+
+	//bi-directional many-to-one association to Transaction
+	@OneToMany(mappedBy="user")
+	private List<Transaction> transactions;
+
+	//bi-directional one-to-one association to Account
+	@OneToOne(mappedBy="user")
+	private Account account;
+
+	public User() {
 	}
-	public void setUser_Id(int user_Id) {
-		User_Id = user_Id;
+
+	public long getUserId() {
+		return this.userId;
 	}
+
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+
 	public String getPass() {
-		return Pass;
+		return this.pass;
 	}
+
 	public void setPass(String pass) {
-		Pass = pass;
+		this.pass = pass;
 	}
-	public int getAcc_No() {
-		return Acc_No;
+
+	public List<Transaction> getTransactions() {
+		return this.transactions;
 	}
-	public void setAcc_No(int acc_No) {
-		Acc_No = acc_No;
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
-	public String getProfile_Pass() {
-		return Profile_Pass;
+
+	public Transaction addTransaction(Transaction transaction) {
+		getTransactions().add(transaction);
+		transaction.setUser(this);
+
+		return transaction;
 	}
-	public void setProfile_Pass(String profile_Pass) {
-		Profile_Pass = profile_Pass;
+
+	public Transaction removeTransaction(Transaction transaction) {
+		getTransactions().remove(transaction);
+		transaction.setUser(null);
+
+		return transaction;
 	}
-	
+
+	public Account getAccount() {
+		return this.account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
 }
