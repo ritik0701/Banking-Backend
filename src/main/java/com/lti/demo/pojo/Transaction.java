@@ -38,16 +38,14 @@ public class Transaction implements Serializable {
 	@Column(name="TRANSACTION_DATE")
 	private Date transactionDate;
 
-	@Column(name="TRANSACTION_TYPE_ID")
-	private BigDecimal transactionTypeId;
+	@Column(name="TRANSACTION_TYPE")
+	private String transactionType;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private User user;
+	@JoinColumn(name="acc_no")
+	private Account account;
 
-	public Transaction() {
-	}
 
 	public long getTransactionId() {
 		return this.transactionId;
@@ -97,20 +95,20 @@ public class Transaction implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-	public BigDecimal getTransactionTypeId() {
-		return this.transactionTypeId;
+	public Account getAccount() {
+		return this.account;
 	}
 
-	public void setTransactionTypeId(BigDecimal transactionTypeId) {
-		this.transactionTypeId = transactionTypeId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
-	public User getUser() {
-		return this.user;
+	public String getTransactionType() {
+		return transactionType;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 
 }

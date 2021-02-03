@@ -1,7 +1,10 @@
 package com.lti.demo;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,12 @@ import com.lti.demo.pojo.Account;
 import com.lti.demo.pojo.Admin;
 import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.pojo.User;
+import com.lti.demo.pojo.Transaction;
+
 import com.lti.demo.repository.AccountRepositoryImpl;
 import com.lti.demo.repository.AdminRepositoryImpl;
 import com.lti.demo.repository.BeneficiaryRepositoryImpl;
+import com.lti.demo.repository.TransactionRepositoryImpl;
 import com.lti.demo.repository.UserRepositoryImpl;
 
 
@@ -162,5 +168,80 @@ class DarkBankingApplicationTests {
 	void getBeneficiary() {
 		System.out.println(br.getBeneficiaryList(10000));
 }
+	
+	//Deepraj------------------------------------------------------------------------------------
+	
+
+
+	@Autowired
+	TransactionRepositoryImpl transrepo;
+	
+	@Test
+	void GetAllTransaction() {
+	
+		System.out.println("running test : transrepo : "+transrepo);
+		List< Transaction > trans; 
+		
+		trans = transrepo.getAllRecords(100000000);
+		for (Transaction ts : trans) {
+			System.out.println(" Transaction id"+ts.getTransactionId());
+			
+			System.out.println(" Beneficiary Account No."+ts.getBeneficiaryAcctNo());
+			
+		}
+			
+	}
+	
+	@Test
+	void SaveTransaction() {
+		
+		System.out.println("running test : TransRepo : "+ transrepo );
+		Transaction t1 =  new Transaction();
+		t1.setAccount(account.getAccountDetails(100000000));
+		t1.setBeneficiaryAcctNo(BigDecimal.valueOf(100032002));
+		t1.setBeneficiaryName("Vishal D");
+		t1.setDbOrCr("db");
+		t1.setTransactionAmount(BigDecimal.valueOf(10000.0));
+		t1.setTransactionDate(new Date());
+		t1.setTransactionType("NEFT");
+		transrepo.save(t1);
+		
+	}
+
+	
+	@Test
+	void GetbetweenTransaction() {
+	
+		System.out.println("running test : transrepo : "+transrepo);
+		List<Transaction> trans; 
+		 String sDate1="31/1/2021";  
+		 String sDate2="3/2/2021";  
+		  Date date1 = null;
+		try {
+			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		  Date date2 = null;
+		try {
+			date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		trans = transrepo.getTransactionBetweenDates(date1, date2, "100000000");
+		for (Transaction ts : trans) {
+			System.out.println(" Transaction id"+ts.getTransactionId());
+			
+			System.out.println(" Beneficiary Account No."+ts.getBeneficiaryAcctNo());
+			
+		}
+			
+	}
+	@Test
+	void testTransactionid() {
+		System.out.println(transrepo.getTransactionById(90001));
+	}
 	
 }

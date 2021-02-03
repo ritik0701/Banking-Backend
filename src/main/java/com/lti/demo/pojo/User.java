@@ -25,8 +25,6 @@ public class User implements Serializable {
 	private String pass;
 
 	//bi-directional many-to-one association to Transaction
-	@OneToMany(mappedBy="user")
-	private List<Transaction> transactions;
 
 	//bi-directional one-to-one association to Account
 	@OneToOne(mappedBy="user")
@@ -53,28 +51,6 @@ public class User implements Serializable {
 
 	public void setPass(String pass) {
 		this.pass = pass;
-	}
-
-	public List<Transaction> getTransactions() {
-		return this.transactions;
-	}
-
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
-	}
-
-	public Transaction addTransaction(Transaction transaction) {
-		getTransactions().add(transaction);
-		transaction.setUser(this);
-
-		return transaction;
-	}
-
-	public Transaction removeTransaction(Transaction transaction) {
-		getTransactions().remove(transaction);
-		transaction.setUser(null);
-
-		return transaction;
 	}
 
 	public Account getAccount() {

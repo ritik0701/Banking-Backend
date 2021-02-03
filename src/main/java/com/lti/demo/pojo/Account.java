@@ -73,7 +73,33 @@ public class Account implements Serializable {
 	@OneToOne
 	@JoinColumn(name="ACC_NO", referencedColumnName="ACC_NO")
 	private User user;
+	
+	@OneToMany(mappedBy="account")
+	private List<Transaction> transactions;
+	
+	public Transaction addTransaction(Transaction transaction) {
+		getTransactions().add(transaction);
+		transaction.setAccount(this);
 
+		return transaction;
+	}
+
+	public Transaction removeTransaction(Transaction transaction) {
+		getTransactions().remove(transaction);
+		transaction.setAccount(null);
+
+		return transaction;
+	}
+
+	
+
+	public List<Transaction> getTransactions() {
+		return this.transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
 
 	public long getAccNo() {
 		return this.accNo;
