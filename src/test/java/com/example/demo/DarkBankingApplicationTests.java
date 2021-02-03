@@ -16,12 +16,7 @@ class DarkBankingApplicationTests {
 		ar.getAccountBalance(1000000000);
 	}
 	
-	@Test
-	void testOpenAccount() {
-		AccountRepositoryImpl ar = new AccountRepositoryImpl();
-		Account account = new Account();
-		account.set 
-		ar.openAccount(null);
-	}
+	
+	
 
 }
