@@ -84,7 +84,7 @@ public class Account implements Serializable {
 		return this.accNo;
 	}
 
-	public void setAccNo(long accNo) {
+	public void setAccNo(int accNo) {
 		this.accNo = accNo;
 	}
 

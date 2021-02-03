@@ -10,12 +10,14 @@ public interface AccountRepository {
 	
 	//getAccountNumber
 	
-	public String getAccountStatus(int accountNumber);
+	public String getAccountStatus(long accountNumber);
 	
-	public BigDecimal getAccountBalance(int accountNumber);
+	public BigDecimal getAccountBalance(long accountNumber);
 	
-	public boolean isUserValid(int accountNumber);
+	public boolean isUserValid(long accountNumber);
 	
-	public Account getAccountDetails(int accountNumber);
+	public Account getAccountDetails(long accountNumber);
+	
+	public void updateBalance(BigDecimal updatedBalance,long accountNumber);
 	
 }

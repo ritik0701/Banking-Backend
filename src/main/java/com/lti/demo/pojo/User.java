@@ -31,10 +31,10 @@ public class User implements Serializable {
 	//bi-directional one-to-one association to Account
 	@OneToOne(mappedBy="user")
 	private Account account;
-
-	public User() {
-	}
-
+	
+	@Column(name="transaction_Password",nullable=false)
+	private int transactionPassword;
+	
 	public long getUserId() {
 		return this.userId;
 	}
@@ -79,6 +79,14 @@ public class User implements Serializable {
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public int getTransaction_Password() {
+		return transactionPassword;
+	}
+
+	public void setTransaction_Password(int transaction_Password) {
+		this.transactionPassword = transaction_Password;
 	}
 
 }
