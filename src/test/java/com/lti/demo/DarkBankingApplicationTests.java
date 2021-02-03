@@ -8,15 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.lti.demo.pojo.Account;
+import com.lti.demo.pojo.Admin;
+import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.pojo.User;
 import com.lti.demo.repository.AccountRepositoryImpl;
 import com.lti.demo.repository.AdminRepositoryImpl;
+import com.lti.demo.repository.BeneficiaryRepositoryImpl;
 import com.lti.demo.repository.UserRepositoryImpl;
 
 
 @SpringBootTest
 class DarkBankingApplicationTests {
 
+	//Ritik-------------------------------------------------------------------------------
+	
 	@Autowired
 	AccountRepositoryImpl account;
 	
@@ -28,23 +33,21 @@ class DarkBankingApplicationTests {
 		acc.setAdminRemark("insert from account");
 		acc.setAnnualIncome(BigDecimal.valueOf(6767.09));
 		acc.setBalance(BigDecimal.valueOf(634767.09));
-		acc.setBeneficiaries(null);
 		acc.setCity("Indore");
 		acc.setDob(new Date());
-		acc.setEmail("aadish@gnail.com");
+		acc.setEmail("aadish123@gnail.com");
 		acc.setFather("Mukesh Chhap");
-		acc.setFirstname("Aadish");
+		acc.setFirstname("Ritik");
 		acc.setLandmark("Near School");
 		acc.setLastname("Jain");
 		acc.setMiddlename(null);
 		acc.setOccupation("Softwre engineer");
-		acc.setPhone("9337729923");
+		acc.setPhone("9337729953");
 		acc.setPincode(452001);
 		acc.setProofId("129239229492");
 		acc.setProofType("Aadhar");
 		acc.setState("MP");
 		acc.setUser(null);
-		
 		account.openAccount(acc);
 	}
 	
@@ -73,6 +76,7 @@ class DarkBankingApplicationTests {
 		account.updateBalance(BigDecimal.valueOf(9000),100000000);
 	}
 	
+	//Ketki------------------------------------------------------------------------
 	
 	@Autowired
 	UserRepositoryImpl userrepo;
@@ -118,5 +122,45 @@ class DarkBankingApplicationTests {
 	{
 		System.out.println(userrepo.isUserValid(500000));
 	}
+	
+	//AAdish---------------------------------------------------------------------------------------
+	
+	@Autowired
+	AdminRepositoryImpl ar;	
+	
+	@Test
+	void getAdmin() {
+		ar.getAdminById(1001);
+		System.out.println("running test : AdminRepo :" +ar);
+	
+	}
+	
+	@Test
+	void getAdminPassword() {
+		System.out.println(ar.getPasswordById(1001));
+	
+	}
+	
+	
+	@Autowired
+	BeneficiaryRepositoryImpl br;
+	
+	@Test
+	void saveBeneficiary() {
+		
+		Beneficiary beneficiary = new Beneficiary();
+		beneficiary.setBankIfsc("HDFC3498");
+		beneficiary.setBeneficiaryAccNo(432589898);
+		beneficiary.setBeneficiaryName("Deepraj");
+		beneficiary.setDateAdded(new Date());
+		beneficiary.setUser(userrepo.findUserById(10000));
+		
+		br.save(beneficiary);
+	}
+	
+	@Test
+	void getBeneficiary() {
+		System.out.println(br.getBeneficiaryList(10000));
+}
 	
 }

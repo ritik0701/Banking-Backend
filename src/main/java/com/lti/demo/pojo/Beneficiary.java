@@ -16,36 +16,26 @@ public class Beneficiary implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ACC_NO")
-	private long accNo;
+	@Column(name="beneficiary_Id")
+	private long beneficiaryId;
+	
+	@Column(name="beneficiary_ACC_NO")
+	private long beneficiaryAccNo;
 
 	@Column(name="BANK_IFSC")
 	private String bankIfsc;
-
-	@Column(name="BANK_NAME")
-	private String bankName;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="DATE_ADDED")
 	private Date dateAdded;
 
-	private String name;
+	@Column(name="beneficiary_name")
+	private String beneficiaryName;
 
 	//bi-directional many-to-one association to Account
 	@ManyToOne
-	@JoinColumn(name="USER_ACC_NO")
-	private Account account;
-
-	public Beneficiary() {
-	}
-
-	public long getAccNo() {
-		return this.accNo;
-	}
-
-	public void setAccNo(long accNo) {
-		this.accNo = accNo;
-	}
+	@JoinColumn(name="user_id")
+	private User user;
 
 	public String getBankIfsc() {
 		return this.bankIfsc;
@@ -53,14 +43,6 @@ public class Beneficiary implements Serializable {
 
 	public void setBankIfsc(String bankIfsc) {
 		this.bankIfsc = bankIfsc;
-	}
-
-	public String getBankName() {
-		return this.bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
 	}
 
 	public Date getDateAdded() {
@@ -71,20 +53,36 @@ public class Beneficiary implements Serializable {
 		this.dateAdded = dateAdded;
 	}
 
-	public String getName() {
-		return this.name;
+	public long getBeneficiaryId() {
+		return beneficiaryId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setBeneficiaryId(long beneficiaryId) {
+		this.beneficiaryId = beneficiaryId;
 	}
 
-	public Account getAccount() {
-		return this.account;
+	public long getBeneficiaryAccNo() {
+		return beneficiaryAccNo;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setBeneficiaryAccNo(long beneficiaryAccNo) {
+		this.beneficiaryAccNo = beneficiaryAccNo;
+	}
+
+	public String getBeneficiaryName() {
+		return beneficiaryName;
+	}
+
+	public void setBeneficiaryName(String beneficiaryName) {
+		this.beneficiaryName = beneficiaryName;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

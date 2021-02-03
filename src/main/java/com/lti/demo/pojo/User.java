@@ -35,6 +35,10 @@ public class User implements Serializable {
 	@Column(name="transaction_Password",nullable=false)
 	private int transactionPassword;
 	
+	//bi-directional many-to-one association to Beneficiary
+	@OneToMany(mappedBy="user")
+	private List<Beneficiary> beneficiaries;
+	
 	public long getUserId() {
 		return this.userId;
 	}
@@ -87,6 +91,28 @@ public class User implements Serializable {
 
 	public void setTransaction_Password(int transaction_Password) {
 		this.transactionPassword = transaction_Password;
+	}
+	
+	public List<Beneficiary> getBeneficiaries() {
+		return this.beneficiaries;
+	}
+
+	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
+		this.beneficiaries = beneficiaries;
+	}
+	
+	public Beneficiary addBeneficiary(Beneficiary beneficiary) {
+		getBeneficiaries().add(beneficiary);
+		beneficiary.setUser(this);
+
+		return beneficiary;
+	}
+
+	public Beneficiary removeBeneficiary(Beneficiary beneficiary) {
+		getBeneficiaries().remove(beneficiary);
+		beneficiary.setUser(null);
+
+		return beneficiary;
 	}
 
 }
