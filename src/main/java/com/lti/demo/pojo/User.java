@@ -25,16 +25,18 @@ public class User implements Serializable {
 	private String pass;
 
 	//bi-directional many-to-one association to Transaction
-	@OneToMany(mappedBy="user")
-	private List<Transaction> transactions;
 
 	//bi-directional one-to-one association to Account
 	@OneToOne(mappedBy="user")
 	private Account account;
-
-	public User() {
-	}
-
+	
+	@Column(name="transaction_Password",nullable=false)
+	private int transactionPassword;
+	
+	//bi-directional many-to-one association to Beneficiary
+	@OneToMany(mappedBy="user")
+	private List<Beneficiary> beneficiaries;
+	
 	public long getUserId() {
 		return this.userId;
 	}
@@ -51,34 +53,42 @@ public class User implements Serializable {
 		this.pass = pass;
 	}
 
-	public List<Transaction> getTransactions() {
-		return this.transactions;
-	}
-
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
-	}
-
-	public Transaction addTransaction(Transaction transaction) {
-		getTransactions().add(transaction);
-		transaction.setUser(this);
-
-		return transaction;
-	}
-
-	public Transaction removeTransaction(Transaction transaction) {
-		getTransactions().remove(transaction);
-		transaction.setUser(null);
-
-		return transaction;
-	}
-
 	public Account getAccount() {
 		return this.account;
 	}
 
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	public int getTransaction_Password() {
+		return transactionPassword;
+	}
+
+	public void setTransaction_Password(int transaction_Password) {
+		this.transactionPassword = transaction_Password;
+	}
+	
+	public List<Beneficiary> getBeneficiaries() {
+		return this.beneficiaries;
+	}
+
+	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
+		this.beneficiaries = beneficiaries;
+	}
+	
+	public Beneficiary addBeneficiary(Beneficiary beneficiary) {
+		getBeneficiaries().add(beneficiary);
+		beneficiary.setUser(this);
+
+		return beneficiary;
+	}
+
+	public Beneficiary removeBeneficiary(Beneficiary beneficiary) {
+		getBeneficiaries().remove(beneficiary);
+		beneficiary.setUser(null);
+
+		return beneficiary;
 	}
 
 }

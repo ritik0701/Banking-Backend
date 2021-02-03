@@ -13,6 +13,7 @@ public class Admin  {
 	@Column(name="USER_ID")
 	private long userId;
 
+	@Column(name = "pass")
 	private String pass;
 
 	public long getUserId() {

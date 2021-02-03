@@ -43,11 +43,9 @@ public class Transaction implements Serializable {
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private User user;
+	@JoinColumn(name="acc_no")
+	private Account account;
 
-	public Transaction() {
-	}
 
 	public long getTransactionId() {
 		return this.transactionId;
@@ -97,6 +95,7 @@ public class Transaction implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
+<<<<<<< HEAD
 	
 
 	public String getTransactionType() {
@@ -105,14 +104,22 @@ public class Transaction implements Serializable {
 
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
+=======
+	public Account getAccount() {
+		return this.account;
 	}
 
-	public User getUser() {
-		return this.user;
+	public void setAccount(Account account) {
+		this.account = account;
+>>>>>>> master
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
 	}
 
 }

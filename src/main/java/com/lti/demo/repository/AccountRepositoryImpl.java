@@ -24,21 +24,21 @@ public class AccountRepositoryImpl implements AccountRepository{
 	}
 
 	@Override
-	public String getAccountStatus(int accountNummber) {
+	public String getAccountStatus(long accountNummber) {
 		// TODO Auto-generated method stub
 		return  (String) entityManager.createNativeQuery("select u.ACCOUNT_STATUS from Account u where u.ACC_NO="+accountNummber).getSingleResult();
 		
 	}
 
 	@Override
-	public BigDecimal getAccountBalance(int accountNummber) {
+	public BigDecimal getAccountBalance(long accountNummber) {
 		// TODO Auto-generated method stub
 		return  (BigDecimal) entityManager.createNativeQuery("select u.Balance from Account u where u.ACC_NO="+accountNummber).getSingleResult();
 		
 	}
 
 	@Override
-	public boolean isUserValid(int AccountNummber) {
+	public boolean isUserValid(long AccountNummber) {
 		// TODO Auto-generated method stub
 		if(getAccountStatus(AccountNummber).equals("open")) {
 			return true;
@@ -47,9 +47,18 @@ public class AccountRepositoryImpl implements AccountRepository{
 	}
 
 	@Override
-	public Account getAccountDetails(int accountNumber) {
+	public Account getAccountDetails(long accountNumber) {
 		return entityManager.find(Account.class, accountNumber);
 	}
+
+	@Override
+	public void updateBalance(BigDecimal updatedBalance, long accountNumber) {
+		// TODO Auto-generated method stub
+		 entityManager.createNativeQuery("update account set balance= :updatedBalance where u.ACC_NO= :accNumber")
+		 .setParameter("updatedBalance", updatedBalance)
+		 .setParameter("accNumber", accountNumber);
+	}
+
 
 	
 }

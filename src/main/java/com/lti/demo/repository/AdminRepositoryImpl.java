@@ -2,6 +2,8 @@ package com.lti.demo.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.lti.demo.pojo.Admin;
@@ -12,21 +14,31 @@ public class AdminRepositoryImpl implements AdminRepository {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@Override
+	
+	
+	@Transactional
 	public Admin getAdminById(long userId) {
 		
 		return entityManager.find(Admin.class, userId);
 	}
 
-	@Override
+	@Transactional
 	public boolean isAdminAvailable(long userId) {
-		return (Long) entityManager.createNativeQuery("select count(a.USER_ID) from Admin a where a.USER_ID = :user")
-				.setParameter("user", userId).getSingleResult() == 1 ? true : false;
+		return (Long) entityManager.createNativeQuery("select count(a.user_id) from Admin a where a.user_id = :userid")
+				.setParameter("userid", userId).getSingleResult() == 1 ? true : false;
 	}
 
-	@Override
-	public String getAdminByIdAndPassword(long userId, String password) {
+	@Transactional
+	public String getPasswordById(long userId) {
 		// TODO Auto-generated method stub
-		return null;
+		return (String) entityManager.createNativeQuery("select a.pass from Admin a where a.user_id = :userid")
+				.setParameter("userid", userId).getSingleResult();
+	}
+
+	
+
+	public void save(Admin admin) {
+		// TODO Auto-generated method stub
+		
 	}
 }	

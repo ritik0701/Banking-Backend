@@ -68,23 +68,44 @@ public class Account implements Serializable {
 	@Column(name="STATE")
 	private String state;
 
-	//bi-directional many-to-one association to Beneficiary
-	@OneToMany(mappedBy="account")
-	private List<Beneficiary> beneficiaries;
 
 	//bi-directional one-to-one association to User
 	@OneToOne
 	@JoinColumn(name="ACC_NO", referencedColumnName="ACC_NO")
 	private User user;
+	
+	@OneToMany(mappedBy="account")
+	private List<Transaction> transactions;
+	
+	public Transaction addTransaction(Transaction transaction) {
+		getTransactions().add(transaction);
+		transaction.setAccount(this);
 
-	public Account() {
+		return transaction;
+	}
+
+	public Transaction removeTransaction(Transaction transaction) {
+		getTransactions().remove(transaction);
+		transaction.setAccount(null);
+
+		return transaction;
+	}
+
+	
+
+	public List<Transaction> getTransactions() {
+		return this.transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 
 	public long getAccNo() {
 		return this.accNo;
 	}
 
-	public void setAccNo(long accNo) {
+	public void setAccNo(int accNo) {
 		this.accNo = accNo;
 	}
 
@@ -230,28 +251,6 @@ public class Account implements Serializable {
 
 	public void setState(String state) {
 		this.state = state;
-	}
-
-	public List<Beneficiary> getBeneficiaries() {
-		return this.beneficiaries;
-	}
-
-	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
-		this.beneficiaries = beneficiaries;
-	}
-
-	public Beneficiary addBeneficiary(Beneficiary beneficiary) {
-		getBeneficiaries().add(beneficiary);
-		beneficiary.setAccount(this);
-
-		return beneficiary;
-	}
-
-	public Beneficiary removeBeneficiary(Beneficiary beneficiary) {
-		getBeneficiaries().remove(beneficiary);
-		beneficiary.setAccount(null);
-
-		return beneficiary;
 	}
 
 	public User getUser() {
