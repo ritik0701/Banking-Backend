@@ -1,5 +1,9 @@
 package com.lti.demo.repository;
+<<<<<<< HEAD
 
+=======
+import java.util.List;
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -74,4 +78,75 @@ public class UserRepositoryImpl implements UserRepository {
 	
 	
 	
+<<<<<<< HEAD
 }
+=======
+}
+	
+
+
+
+
+
+/*
+ * //reset password
+	
+		@Override
+		@Transactional
+		public void resetPassword(String userId, String updatedPassword) {
+			String queryString ="update Users set pass=:password where user_id=:id";
+			em.createQuery(queryString)
+			.setParameter("id",userId)
+			.setParameter("password",updatedPassword)
+			.executeUpdate();
+		}
+ * //reset password
+	
+	@Override
+	@Transactional
+	public void resetPassword(String userId, String updatedPassword) {
+		String queryString ="update Users set pass=:password where user_id=:id";
+		em.createQuery(queryString)
+		.setParameter("id",userId)
+		.setParameter("password",updatedPassword)
+		.executeUpdate();
+	}
+	
+	
+	
+
+	@Override
+	@Transactional
+	public void resetTransactionPassword(String userId, String updatedPassword) {
+		System.out.println(userId);
+		System.out.println(updatedPassword);
+		String queryString="update User set transation_Password=:password where userId=:id";
+		em.createQuery(queryString)
+		.setParameter("id",userId)
+		.setParameter("password",updatedPassword)
+		.executeUpdate();
+	}
+ @Override
+	@Transactional
+	public boolean isUserPresent() {
+		String queryString="select count(*) from User";
+		return (Long)em.createQuery(queryString)
+				.getSingleResult()==0 ? true:false;
+	}
+	@Override
+	@Transactional
+	public String getUserId() {
+		// TODO Auto-generated method stub
+				String queryString="select max(u.user_id) from users u";
+				return (String)em.createQuery(queryString)
+						.getSingleResult();
+	}
+	@Override
+	@Transactional
+	public boolean isAccountRegistered(String accNumber) {
+		String queryString="se"
+				+ "lect count(u.userId) from User u where u.accountNumber.accountNumber =:accNumber";
+		return (Long)em.createQuery("getAcc").setParameter("accNumber", accNumber)
+				.getSingleResult()==1 ? true : false;
+	}*/
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd

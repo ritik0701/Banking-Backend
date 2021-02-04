@@ -1,60 +1,149 @@
+<<<<<<< HEAD
+<<<<<<<< HEAD:src/main/java/com/lti/demo/pojo/Transaction.java
 package com.lti.demo.pojo;
+========
+package com.lti.pojo;
+import java.io.Serializable;
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
+>>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd:src/main/java/com/lti/pojo/Transaction.java
+=======
+package com.lti.demo.pojo;
+import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.math.BigDecimal;
+import java.util.Date;
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 
+
+/**
+ * The persistent class for the TRANSACTIONS database table.
+ * 
+ */
 @Entity
-@Table(name="Transactions")
-public class Transaction {
+@Table(name="TRANSACTIONS")
+@NamedQuery(name="Transaction.findAll", query="SELECT t FROM Transaction t")
+public class Transaction implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name="transaction_id",nullable=false)
-	 private int Transaction_Id; 
-	@Column(name="User_Account_no", nullable = false)
-	private String User_Account_no;
-	@Column(name="beneficiary_acct_no",nullable=false)
-	private int Beneficiary_Acct_No; 
-	@Column(name="beneficiary_name",nullable=false)
-    private String Beneficiary_Name;
-	public int getTransaction_Id() {
-		return Transaction_Id;
+	@SequenceGenerator(name="TRANSACTIONS_TRANSACTIONID_GENERATOR", sequenceName="TRANSACTION_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TRANSACTIONS_TRANSACTIONID_GENERATOR")
+	@Column(name="TRANSACTION_ID")
+	private long transactionId;
+
+	@Column(name="BENEFICIARY_ACCT_NO")
+	private BigDecimal beneficiaryAcctNo;
+
+	@Column(name="BENEFICIARY_NAME")
+	private String beneficiaryName;
+
+	@Column(name="DB_OR_CR")
+	private String dbOrCr;
+
+	@Column(name="TRANSACTION_AMOUNT")
+	private BigDecimal transactionAmount;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="TRANSACTION_DATE")
+	private Date transactionDate;
+
+	@Column(name="TRANSACTION_TYPE")
+	private String transactionType;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne
+<<<<<<< HEAD
+	@JoinColumn(name="USER_ID")
+	private User user;
+
+	public Transaction() {
 	}
-	public void setTransaction_Id(int transaction_Id) {
-		Transaction_Id = transaction_Id;
+=======
+	@JoinColumn(name="acc_no")
+	private Account account;
+
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
+
+	public long getTransactionId() {
+		return this.transactionId;
 	}
-	public String getUser_Account_no() {
-		return User_Account_no;
+
+	public void setTransactionId(long transactionId) {
+		this.transactionId = transactionId;
 	}
-	public void setUser_Account_no(String user_Account_no) {
-		User_Account_no = user_Account_no;
+
+	public BigDecimal getBeneficiaryAcctNo() {
+		return this.beneficiaryAcctNo;
 	}
-	public int getBeneficiary_Acct_No() {
-		return Beneficiary_Acct_No;
+
+	public void setBeneficiaryAcctNo(BigDecimal beneficiaryAcctNo) {
+		this.beneficiaryAcctNo = beneficiaryAcctNo;
 	}
-	public void setBeneficiary_Acct_No(int beneficiary_Acct_No) {
-		Beneficiary_Acct_No = beneficiary_Acct_No;
+
+	public String getBeneficiaryName() {
+		return this.beneficiaryName;
 	}
-	public String getBeneficiary_Name() {
-		return Beneficiary_Name;
+
+	public void setBeneficiaryName(String beneficiaryName) {
+		this.beneficiaryName = beneficiaryName;
 	}
-	public void setBeneficiary_Name(String beneficiary_Name) {
-		Beneficiary_Name = beneficiary_Name;
+
+	public String getDbOrCr() {
+		return this.dbOrCr;
 	}
-	public int getTransaction_Type() {
-		return Transaction_Type;
+
+	public void setDbOrCr(String dbOrCr) {
+		this.dbOrCr = dbOrCr;
 	}
-	public void setTransaction_Type(int transaction_Type) {
-		Transaction_Type = transaction_Type;
+
+	public BigDecimal getTransactionAmount() {
+		return this.transactionAmount;
 	}
-	public int getTransaction_Amount() {
-		return Transaction_Amount;
+
+	public void setTransactionAmount(BigDecimal transactionAmount) {
+		this.transactionAmount = transactionAmount;
 	}
-	public void setTransaction_Amount(int transaction_Amount) {
-		Transaction_Amount = transaction_Amount;
+
+	public Date getTransactionDate() {
+		return this.transactionDate;
 	}
-	@Column(name="transaction_type",nullable=false)
-	private int Transaction_Type; 
-	@Column(name="transaction_amount",nullable=false)
-	private int Transaction_Amount; 
+
+	public void setTransactionDate(Date transactionDate) {
+		this.transactionDate = transactionDate;
+	}
+
+<<<<<<< HEAD
+	
+=======
+	public Account getAccount() {
+		return this.account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
+
+	public String getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
+<<<<<<< HEAD
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+=======
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 }

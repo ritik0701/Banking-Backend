@@ -38,4 +38,11 @@ public class BeneficiaryRepositoryImpl implements BeneficiaryRepository {
 	}
 	
 	
+<<<<<<< HEAD
 }
+=======
+
+	
+}
+	
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
