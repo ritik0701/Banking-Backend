@@ -1,4 +1,4 @@
-package com.lti.repository;
+package com.lti.demo.repository;
 
 public class AccountRepositoryImpl {
 

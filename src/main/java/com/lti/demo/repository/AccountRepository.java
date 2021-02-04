@@ -1,6 +1,6 @@
-package com.lti.repository;
+package com.lti.demo.repository;
 
-import com.lti.pojo.Account;
+import com.lti.demo.pojo.Account;
 
 public interface AccountRepository {
 

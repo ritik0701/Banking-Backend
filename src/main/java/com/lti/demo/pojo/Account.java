@@ -1,4 +1,4 @@
-package com.lti.pojo;
+package com.lti.demo.pojo;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
