@@ -11,6 +11,7 @@ import com.lti.demo.pojo.Beneficiary;
 public interface BeneficiaryRepository {
 	
 	void save(Beneficiary benf);
+	
 	List<Beneficiary> getBeneficiaryList(long user_id) ;
 	
 <<<<<<< HEAD
