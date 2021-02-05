@@ -1,117 +1,81 @@
-package com.lti.pojo;
-import java.io.Serializable;
-import javax.persistence.*;
+package com.lti.demo.dto;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 
-/**
- * The persistent class for the TRANSACTIONS database table.
- * 
- */
-@Entity
-@Table(name="TRANSACTIONS")
-@NamedQuery(name="Transaction.findAll", query="SELECT t FROM Transaction t")
-public class Transaction implements Serializable {
-	private static final long serialVersionUID = 1L;
+import com.lti.demo.pojo.Account;
+import com.lti.demo.pojo.Transaction;
 
-	@Id
-	@SequenceGenerator(name="TRANSACTIONS_TRANSACTIONID_GENERATOR", sequenceName="TRANSACTION_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TRANSACTIONS_TRANSACTIONID_GENERATOR")
-	@Column(name="TRANSACTION_ID")
+public class TransactionDetailsDTO {
 	private long transactionId;
-
-	@Column(name="BENEFICIARY_ACCT_NO")
 	private BigDecimal beneficiaryAcctNo;
-
-	@Column(name="BENEFICIARY_NAME")
 	private String beneficiaryName;
-
-	@Column(name="DB_OR_CR")
 	private String dbOrCr;
-
-	@Column(name="TRANSACTION_AMOUNT")
 	private BigDecimal transactionAmount;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="TRANSACTION_DATE")
 	private Date transactionDate;
-
-	@Column(name="TRANSACTION_TYPE")
 	private String transactionType;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="USER_ID")
-	private User user;
-
-	public Transaction() {
-	}
-
+	private long accNo;
+	
 	public long getTransactionId() {
-		return this.transactionId;
+		return transactionId;
 	}
-
 	public void setTransactionId(long transactionId) {
 		this.transactionId = transactionId;
 	}
-
 	public BigDecimal getBeneficiaryAcctNo() {
-		return this.beneficiaryAcctNo;
+		return beneficiaryAcctNo;
 	}
-
 	public void setBeneficiaryAcctNo(BigDecimal beneficiaryAcctNo) {
 		this.beneficiaryAcctNo = beneficiaryAcctNo;
 	}
-
 	public String getBeneficiaryName() {
-		return this.beneficiaryName;
+		return beneficiaryName;
 	}
-
 	public void setBeneficiaryName(String beneficiaryName) {
 		this.beneficiaryName = beneficiaryName;
 	}
-
 	public String getDbOrCr() {
-		return this.dbOrCr;
+		return dbOrCr;
 	}
-
 	public void setDbOrCr(String dbOrCr) {
 		this.dbOrCr = dbOrCr;
 	}
-
 	public BigDecimal getTransactionAmount() {
-		return this.transactionAmount;
+		return transactionAmount;
 	}
-
 	public void setTransactionAmount(BigDecimal transactionAmount) {
 		this.transactionAmount = transactionAmount;
 	}
-
 	public Date getTransactionDate() {
-		return this.transactionDate;
+		return transactionDate;
 	}
-
 	public void setTransactionDate(Date transactionDate) {
 		this.transactionDate = transactionDate;
 	}
-
-	
-
 	public String getTransactionType() {
 		return transactionType;
 	}
-
 	public void setTransactionType(String transactionType) {
 		this.transactionType = transactionType;
 	}
-
-	public User getUser() {
-		return this.user;
+	public long getAccNo() {
+		return accNo;
 	}
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setAccNo(long accNo) {
+		this.accNo = accNo;
 	}
-
+	
+	public TransactionDetailsDTO convertTransactionToDTO(Transaction transaction) {
+		this.setAccNo(transaction.getAccount().getAccNo());
+		this.setBeneficiaryAcctNo(transaction.getBeneficiaryAcctNo());
+		this.setBeneficiaryName(transaction.getBeneficiaryName());
+		this.setDbOrCr(transaction.getDbOrCr());
+		this.setTransactionAmount(transaction.getTransactionAmount());
+		this.setTransactionDate(transaction.getTransactionDate());
+		this.setTransactionId(transaction.getTransactionId());
+		this.setTransactionType(transaction.getTransactionType());
+		
+		return this;
+	}
 }
