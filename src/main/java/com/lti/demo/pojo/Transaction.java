@@ -1,21 +1,9 @@
-<<<<<<< HEAD
-<<<<<<<< HEAD:src/main/java/com/lti/demo/pojo/Transaction.java
-package com.lti.demo.pojo;
-========
-package com.lti.pojo;
-import java.io.Serializable;
-import javax.persistence.*;
-import java.math.BigDecimal;
-import java.util.Date;
->>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd:src/main/java/com/lti/pojo/Transaction.java
-=======
 package com.lti.demo.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 
 
 /**
@@ -55,17 +43,9 @@ public class Transaction implements Serializable {
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-<<<<<<< HEAD
-	@JoinColumn(name="USER_ID")
-	private User user;
-
-	public Transaction() {
-	}
-=======
 	@JoinColumn(name="acc_no")
 	private Account account;
 
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 
 	public long getTransactionId() {
 		return this.transactionId;
@@ -115,9 +95,6 @@ public class Transaction implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-<<<<<<< HEAD
-	
-=======
 	public Account getAccount() {
 		return this.account;
 	}
@@ -125,7 +102,6 @@ public class Transaction implements Serializable {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 
 	public String getTransactionType() {
 		return transactionType;
@@ -135,15 +111,4 @@ public class Transaction implements Serializable {
 		this.transactionType = transactionType;
 	}
 
-<<<<<<< HEAD
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-=======
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 }

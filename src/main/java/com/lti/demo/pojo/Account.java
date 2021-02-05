@@ -1,197 +1,272 @@
 package com.lti.demo.pojo;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+
+/**
+ * The persistent class for the ACCOUNT database table.
+ * 
+ */
 @Entity
-@Table(name="Account")
-public class Account 
-{
+@Table
+public class Account implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(length = 9, nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private String Account_no;
-	
-	@Column(length = 20, nullable = false)
-	private String firstName;
-	
-	@Column(length = 20)
-	private String middleName;
-	
-	@Column(length = 20)
-	private String lastName;
-	
-	@Column(length = 30, nullable = false)
+	@SequenceGenerator(name="ACCOUNT_ACCNO_GENERATOR", sequenceName="ACC_NO")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACCOUNT_ACCNO_GENERATOR")
+	@Column(name="ACC_NO")
+	private long accNo;
+
+	@Column(name="ACCOUNT_STATUS")
+	private String accountStatus;
+
+	private String address;
+
+	@Column(name="ADMIN_REMARK")
+	private String adminRemark;
+
+	@Column(name="ANNUAL_INCOME")
+	private BigDecimal annualIncome;
+
+	private BigDecimal balance;
+
+	private String city;
+
+	@Temporal(TemporalType.DATE)
+	private Date dob;
+
 	private String email;
-	
-	@Column(length = 10, nullable = false)
-	private String mobileNumber;
-	
-	@Column(length = 20, nullable = false)
-	private double accountBalance;
-	
-	@Column(length = 20)
-	private String fatherName;
-	
-	@Column(length = 20)
-	private int proofTypeID;
-	
-	@Column(length = 20, nullable = false)
-	private String proofID;
-	
-	@Column(length = 10, nullable = false)
-	private String dob;
-	
-	@Column(length = 30)
-	private String Address;
-	
-	@Column(length = 15)
-	private String LandMark;
-	
-	@Column(length = 15)
-	private String State;
-	
-	@Column(length = 15)
-	private String City;
-	
-	@Column(length = 6)
-	private int Pincode;
-	
-	@Column(length = 20)
+
+	private String father;
+
+	private String firstname;
+
+	private String landmark;
+
+	private String lastname;
+
+	private String middlename;
+
 	private String occupation;
+
+	private String phone;
+
+	private int pincode;
+
+	@Column(name="PROOF_ID")
+	private String proofId;
+
+	@Column(name="PROOF_TYPE")
+	private String proofType;
+
+	@Column(name="STATE")
+	private String state;
+
+
+	//bi-directional one-to-one association to User
+	@OneToOne
+	@JoinColumn(name="ACC_NO", referencedColumnName="ACC_NO")
+	private User user;
 	
-	@Column(length = 20)
-	private String annualIncome;
+	@OneToMany(mappedBy="account")
+	private List<Transaction> transactions;
 	
-	@Column(length = 10, nullable = false)
-	private int accountStatus;
+	public Transaction addTransaction(Transaction transaction) {
+		getTransactions().add(transaction);
+		transaction.setAccount(this);
+
+		return transaction;
+	}
+
+	public Transaction removeTransaction(Transaction transaction) {
+		getTransactions().remove(transaction);
+		transaction.setAccount(null);
+
+		return transaction;
+	}
+
 	
-	public String getAccount_no() {
-		return Account_no;
-	
+
+	public List<Transaction> getTransactions() {
+		return this.transactions;
 	}
-	public void setAccount_no(String account_no) {
-		Account_no = account_no;
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
-	public String getFirstName() {
-		return firstName;
+
+	public long getAccNo() {
+		return this.accNo;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+	public void setAccNo(int accNo) {
+		this.accNo = accNo;
 	}
-	public String getMiddleName() {
-		return middleName;
+
+	public String getAccountStatus() {
+		return this.accountStatus;
 	}
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
+
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
 	}
-	public String getLastName() {
-		return lastName;
+
+	public String getAddress() {
+		return this.address;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
+
+	public String getAdminRemark() {
+		return this.adminRemark;
+	}
+
+	public void setAdminRemark(String adminRemark) {
+		this.adminRemark = adminRemark;
+	}
+
+	public BigDecimal getAnnualIncome() {
+		return this.annualIncome;
+	}
+
+	public void setAnnualIncome(BigDecimal annualIncome) {
+		this.annualIncome = annualIncome;
+	}
+
+	public BigDecimal getBalance() {
+		return this.balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public String getCity() {
+		return this.city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Date getDob() {
+		return this.dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getMobileNumber() {
-		return mobileNumber;
+
+	public String getFather() {
+		return this.father;
 	}
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+
+	public void setFather(String father) {
+		this.father = father;
 	}
-	public double getAccountBalance() {
-		return accountBalance;
+
+	public String getFirstname() {
+		return this.firstname;
 	}
-	public void setAccountBalance(double accountBalance) {
-		this.accountBalance = accountBalance;
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-	public String getFatherName() {
-		return fatherName;
+
+	public String getLandmark() {
+		return this.landmark;
 	}
-	public void setFatherName(String fatherName) {
-		this.fatherName = fatherName;
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
 	}
-	public int getProofTypeID() {
-		return proofTypeID;
+
+	public String getLastname() {
+		return this.lastname;
 	}
-	public void setProofTypeID(int proofTypeID) {
-		this.proofTypeID = proofTypeID;
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
-	public String getProofID() {
-		return proofID;
+
+	public String getMiddlename() {
+		return this.middlename;
 	}
-	public void setProofID(String proofID) {
-		this.proofID = proofID;
+
+	public void setMiddlename(String middlename) {
+		this.middlename = middlename;
 	}
-	public String getDob() {
-		return dob;
-	}
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-	public String getAddress() {
-		return Address;
-	}
-	public void setAddress(String address) {
-		Address = address;
-	}
-	public String getLandMark() {
-		return LandMark;
-	}
-	public void setLandMark(String landMark) {
-		LandMark = landMark;
-	}
-	public String getState() {
-		return State;
-	}
-	public void setState(String state) {
-		State = state;
-	}
-	public String getCity() {
-		return City;
-	}
-	public void setCity(String city) {
-		City = city;
-	}
-	public int getPincode() {
-		return Pincode;
-	}
-	public void setPincode(int pincode) {
-		Pincode = pincode;
-	}
+
 	public String getOccupation() {
-		return occupation;
+		return this.occupation;
 	}
+
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
 	}
-	public String getAnnualIncome() {
-		return annualIncome;
+
+	public String getPhone() {
+		return this.phone;
 	}
-	public void setAnnualIncome(String annualIncome) {
-		this.annualIncome = annualIncome;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public int getAccountStatus() {
-		return accountStatus;
+
+	public int getPincode() {
+		return this.pincode;
 	}
-	public void setAccountStatus(int accountStatus) {
-		this.accountStatus = accountStatus;
+
+	public void setPincode(int pincode) {
+		this.pincode = pincode;
 	}
-	public String getAdminRemark() {
-		return AdminRemark;
+
+	public String getProofId() {
+		return this.proofId;
 	}
-	public void setAdminRemark(String adminRemark) {
-		AdminRemark = adminRemark;
+
+	public void setProofId(String proofId) {
+		this.proofId = proofId;
 	}
-	@Column(length = 20)
-	private String AdminRemark;
-	
-	
+
+	public String getState() {
+		return this.state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getProofType() {
+		return proofType;
+	}
+
+	public void setProofType(String proofType) {
+		this.proofType = proofType;
+	}
+
 }

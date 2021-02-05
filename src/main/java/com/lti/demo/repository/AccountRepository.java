@@ -1,5 +1,7 @@
 package com.lti.demo.repository;
 
+import java.math.BigDecimal;
+
 import com.lti.demo.pojo.Account;
 
 public interface AccountRepository {
@@ -8,10 +10,14 @@ public interface AccountRepository {
 	
 	//getAccountNumber
 	
-	public String accountStatus(int accountNummber);
+	public String getAccountStatus(long accountNumber);
 	
-	public double accountBalance(int accountNummber);
+	public BigDecimal getAccountBalance(long accountNumber);
 	
-	public boolean isUserValid(int AccountNummber);
+	public boolean isUserValid(long accountNumber);
+	
+	public Account getAccountDetails(long accountNumber);
+	
+	public void updateBalance(BigDecimal updatedBalance,long accountNumber);
 	
 }

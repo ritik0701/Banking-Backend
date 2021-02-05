@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 package com.lti.demo.repository;
 
 import java.util.Date;
@@ -13,11 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
-
-=======
 import com.lti.demo.pojo.Admin;
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 import com.lti.demo.pojo.Transaction;
 
 @Repository
@@ -32,30 +24,27 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 		em.persist(transaction);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Transaction> getAllRecords(int accNumber) {
+	public List<Transaction> getAllRecords(long accNumber) {
 		String queryString = "select * from Transactions t where t.acc_no = :accNumber";
-		List<Transaction> translist = em.createNativeQuery(queryString).setParameter("accNumber", accNumber).getResultList();
+		List<Transaction> translist = em.createNativeQuery(queryString,Transaction.class).setParameter("accNumber", accNumber).getResultList();
 		return translist;
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Transaction> getTransactionBetweenDates(Date fromDate, Date toDate, String accountnumber) {
+	public List<Transaction> getTransactionBetweenDates(Date fromDate, Date toDate, long accountnumber) {
 		String qr="select * from Transactions where (transaction_Date BETWEEN :fromDate AND :toDate) and acc_no = :accNumber"; 
 		return em.createNativeQuery(qr,Transaction.class).setParameter("fromDate",fromDate).setParameter("toDate",toDate).setParameter("accNumber",accountnumber).getResultList();
 	}
 	
 	
 	@Override
-	public Object getTransactionById(long transactionId) {
+	public Transaction getTransactionById(long transactionId) {
 		String qr="select * from Transactions where transaction_Id = :transactionId"; 
-		return  em.createNativeQuery(qr).setParameter("transactionId",transactionId).getSingleResult();
+		return  (Transaction) em.createNativeQuery(qr,Transaction.class).setParameter("transactionId",transactionId).getSingleResult();
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd

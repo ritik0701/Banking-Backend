@@ -1,4 +1,3 @@
-
 package com.lti.demo.repository;
 
 import javax.persistence.EntityManager;
@@ -36,10 +35,5 @@ public class AdminRepositoryImpl implements AdminRepository {
 				.setParameter("userid", userId).getSingleResult();
 	}
 
-	
 
-	public void save(Admin admin) {
-		// TODO Auto-generated method stub
-		
-	}
 }

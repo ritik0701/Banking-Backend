@@ -1,45 +1,94 @@
 package com.lti.demo.pojo;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
+import java.util.List;
+
+
+/**
+ * The persistent class for the USERS database table.
+ * 
+ */
 @Entity
-@Table(name="user")
-public class User {
+@Table(name="USERS")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	@Column(name="user_id",length=50)
-	private int User_Id; 
-	@Column(name="pass",nullable=false)
-	private String Pass;
-	@Column(name="acc_no",nullable=false)
-	private int Acc_No;
-	@Column(name="profile_pass",nullable=false)
-	private String Profile_Pass;
-	public int getUser_Id() {
-		return User_Id;
+	@SequenceGenerator(name="USERS_USERID_GENERATOR", sequenceName="USER_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERS_USERID_GENERATOR")
+	@Column(name="USER_ID")
+	private long userId;
+
+	private String pass;
+
+	//bi-directional many-to-one association to Transaction
+
+	//bi-directional one-to-one association to Account
+	@OneToOne(mappedBy="user")
+	private Account account;
+	
+	@Column(name="transaction_Password",nullable=false)
+	private int transactionPassword;
+	
+	//bi-directional many-to-one association to Beneficiary
+	@OneToMany(mappedBy="user")
+	private List<Beneficiary> beneficiaries;
+	
+	public long getUserId() {
+		return this.userId;
 	}
-	public void setUser_Id(int user_Id) {
-		User_Id = user_Id;
+
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
+
 	public String getPass() {
-		return Pass;
+		return this.pass;
 	}
+
 	public void setPass(String pass) {
-		Pass = pass;
+		this.pass = pass;
 	}
-	public int getAcc_No() {
-		return Acc_No;
+
+	public Account getAccount() {
+		return this.account;
 	}
-	public void setAcc_No(int acc_No) {
-		Acc_No = acc_No;
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
-	public String getProfile_Pass() {
-		return Profile_Pass;
+
+	public int getTransaction_Password() {
+		return transactionPassword;
 	}
-	public void setProfile_Pass(String profile_Pass) {
-		Profile_Pass = profile_Pass;
+
+	public void setTransaction_Password(int transaction_Password) {
+		this.transactionPassword = transaction_Password;
 	}
 	
+	public List<Beneficiary> getBeneficiaries() {
+		return this.beneficiaries;
+	}
+
+	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
+		this.beneficiaries = beneficiaries;
+	}
+	
+	public Beneficiary addBeneficiary(Beneficiary beneficiary) {
+		getBeneficiaries().add(beneficiary);
+		beneficiary.setUser(this);
+
+		return beneficiary;
+	}
+
+	public Beneficiary removeBeneficiary(Beneficiary beneficiary) {
+		getBeneficiaries().remove(beneficiary);
+		beneficiary.setUser(null);
+
+		return beneficiary;
+	}
 
 }
