@@ -25,6 +25,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 		em.persist(transaction);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Transaction> getAllRecords(long accNumber) {
 		String queryString = "select * from Transactions t where t.acc_no = :accNumber";
@@ -35,7 +36,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Transaction> getTransactionBetweenDates(Date fromDate, Date toDate, String accountnumber) {
+	public List<Transaction> getTransactionBetweenDates(Date fromDate, Date toDate, long accountnumber) {
 		String qr="select * from Transactions where (transaction_Date BETWEEN :fromDate AND :toDate) and acc_no = :accNumber"; 
 		return em.createNativeQuery(qr,Transaction.class).setParameter("fromDate",fromDate).setParameter("toDate",toDate).setParameter("accNumber",accountnumber).getResultList();
 	}
@@ -43,8 +44,13 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	
 	@Override
 	public Transaction getTransactionById(long transactionId) {
+<<<<<<< HEAD
 		return em.find(Transaction.class, transactionId);
 
+=======
+		String qr="select * from Transactions where transaction_Id = :transactionId"; 
+		return  (Transaction) em.createNativeQuery(qr,Transaction.class).setParameter("transactionId",transactionId).getSingleResult();
+>>>>>>> ritik
 	}
 
 }

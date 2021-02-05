@@ -11,7 +11,13 @@ public interface TransactionRepository {
 
 	void save(Transaction transaction);
 	List<Transaction> getAllRecords(long accNumber);
+<<<<<<< HEAD
 	List<Transaction> getTransactionBetweenDates(Date fromDate,Date toDate,String accountnumber);
 	Transaction getTransactionById(long transactionId);
 
 }
+=======
+	List<Transaction> getTransactionBetweenDates(Date fromDate,Date toDate,long accountnumber);
+	Transaction getTransactionById(long transactionId);
+}
+>>>>>>> ritik

@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
 import com.lti.demo.DTO.TransactionDetailsDTO;
+=======
+import com.lti.demo.dto.TransactionDetailsDTO;
+>>>>>>> ritik
 import com.lti.demo.exception.ServiceException;
 import com.lti.demo.pojo.Account;
 import com.lti.demo.pojo.Transaction;
@@ -72,7 +76,11 @@ public class TransactionServiceImpl implements TransactionService {
 	
 
 	@Override
+<<<<<<< HEAD
 	public List<Transaction> getTransactionHistory(Date fromDate, Date toDate, String accountNumber) {
+=======
+	public List<Transaction> getTransactionHistory(Date fromDate, Date toDate, long accountNumber) {
+>>>>>>> ritik
 		return repo.getTransactionBetweenDates(fromDate, toDate, accountNumber);
 	}
 	@Transactional
@@ -121,4 +129,8 @@ public class TransactionServiceImpl implements TransactionService {
 	
 
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ritik

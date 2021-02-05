@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.repository.query.Param;
 
 import com.lti.demo.pojo.Account;
-import com.lti.demo.pojo.Admin;
 import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.pojo.User;
 import com.lti.demo.pojo.Transaction;
@@ -34,7 +33,7 @@ class DarkBankingApplicationTests {
 
 	
 	@Autowired
-	AccountRepositoryImpl account;
+	AccountRepositoryImpl accountRepo;
 	
 	@Test
 	void testSetAccountDetails() {
@@ -59,32 +58,53 @@ class DarkBankingApplicationTests {
 		acc.setProofType("Aadhar");
 		acc.setState("MP");
 		acc.setUser(null);
-		account.openAccount(acc);
+		accountRepo.openAccount(acc);
 	}
 
 	@Test
 	void testGetAccountDetails() {
-		account.getAccountDetails(100000000);
+		Account account = accountRepo.getAccountDetails(100000000);
+		String res = "accountNumber : "+account.getAccNo() 
+			  + ", firstname :" + account.getFirstname()
+			  + ", middlename : "+ account.getMiddlename()
+			  + ", lastname : "+ account.getLastname()
+			  + ", email : "+ account.getEmail()
+			  + ", phone : "+ account.getPhone()
+			  + ", father : "+ account.getFather()
+			  + ", balance : "+ account.getBalance()
+			  + ", proof_type : "+ account.getProofType()
+			  + ", proof_id : "+ account.getProofId()
+			  + ", dob date : "+ account.getDob()
+			  + ", address : "+ account.getAddress()
+			  + ", landmark : "+ account.getLandmark()
+			  + ", pincode : "+ account.getPincode()
+			  + ", city : "+ account.getCity()
+			  + ", state : "+ account.getState()
+			  + ", occupation : "+ account.getOccupation()
+			  + ", annual_income : "+ account.getAnnualIncome()
+			  + ", account_status : "+ account.getAccountStatus()
+			  + ", admin_remark : "+ account.getAdminRemark() ;
+		System.out.print(res);
 	}
 	
 	@Test 
 	void testIsUserValid() {
-		account.isUserValid(100000000);
+		accountRepo.isUserValid(100000000);
 	}
 	
 	@Test 
 	void testGetAccountStatus() {
-		account.getAccountStatus(100000000);
+		accountRepo.getAccountStatus(100000000);
 	}
 	
 	@Test 
 	void testGetAccountBalance() {
-		account.getAccountBalance(100000000);
+		accountRepo.getAccountBalance(100000000);
 	}
 	
 	@Test 
 	void testUpdateBalance() {
-		account.updateBalance(BigDecimal.valueOf(9000),100000000);
+		accountRepo.updateBalance(BigDecimal.valueOf(9000),100000000);
 	}
 	
 	//Ketki------------------------------------------------------------------------
@@ -115,7 +135,11 @@ class DarkBankingApplicationTests {
 	void getAccno() {
 		
 		System.out.println("getting user");
+<<<<<<< HEAD
 		 userrepo.getUserByAccountNumber(100000000);
+=======
+		userrepo.getUserByAccNumber(100000000);
+>>>>>>> ritik
 	}
 	//get Transaction password by accno//working
 	@Test
@@ -208,7 +232,7 @@ class DarkBankingApplicationTests {
 
 		System.out.println("running test : TransRepo : "+ transrepo );
 		Transaction t1 =  new Transaction();
-		t1.setAccount(account.getAccountDetails(100000000));
+		t1.setAccount(accountRepo.getAccountDetails(100000000));
 		t1.setBeneficiaryAcctNo(BigDecimal.valueOf(100032002));
 		t1.setBeneficiaryName("Vishal D");
 		t1.setDbOrCr("db");
@@ -243,8 +267,12 @@ class DarkBankingApplicationTests {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+<<<<<<< HEAD
 		trans = transrepo.getTransactionBetweenDates(date1, date2, "100000000");
 
+=======
+		trans = transrepo.getTransactionBetweenDates(date1, date2, 100000000);
+>>>>>>> ritik
 		for (Transaction ts : trans) {
 			System.out.println(" Transaction id"+ts.getTransactionId());
 			
@@ -267,5 +295,9 @@ class DarkBankingApplicationTests {
 	
 	}
 	
+<<<<<<< HEAD
 
 }
+=======
+}
+>>>>>>> ritik

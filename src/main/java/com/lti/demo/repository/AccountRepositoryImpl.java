@@ -26,14 +26,14 @@ public class AccountRepositoryImpl implements AccountRepository{
 	@Override
 	public String getAccountStatus(long accountNummber) {
 		// TODO Auto-generated method stub
-		return  (String) entityManager.createNativeQuery("select u.ACCOUNT_STATUS from Account u where u.ACC_NO="+accountNummber).getSingleResult();
+		return  (String) entityManager.createNativeQuery("select u.ACCOUNT_STATUS from Account u where u.ACC_NO= :accNumber").setParameter("accNumber",accountNummber).getSingleResult();
 		
 	}
 
 	@Override
 	public BigDecimal getAccountBalance(long accountNummber) {
 		// TODO Auto-generated method stub
-		return  (BigDecimal) entityManager.createNativeQuery("select u.Balance from Account u where u.ACC_NO="+accountNummber).getSingleResult();
+		return  (BigDecimal) entityManager.createNativeQuery("select u.Balance from Account u where u.ACC_NO= :accNumber").setParameter("accNumber",accountNummber).getSingleResult();
 		
 	}
 

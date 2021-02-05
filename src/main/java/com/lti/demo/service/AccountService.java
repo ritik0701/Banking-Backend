@@ -6,7 +6,7 @@ import com.lti.demo.pojo.Account;
 
 public interface AccountService {
 
-	public void openAccountService(Account accountDetails) ;
+	public String openAccountService(Account accountDetails) ;
 	
 	//getAccountNumber
 	
@@ -14,7 +14,7 @@ public interface AccountService {
 	
 	public BigDecimal getAccountBalanceService(long accountNumber);
 	
-	public boolean isUserValidService(long accountNumber);
+	public String isUserValidService(long accountNumber);
 	
 	public Account getAccountDetailsService(long accountNumber);
 	

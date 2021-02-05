@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 import com.lti.demo.DTO.TransactionDetailsDTO;
+=======
+import com.lti.demo.dto.TransactionDetailsDTO;
+>>>>>>> ritik
 import com.lti.demo.pojo.Transaction;
 import com.lti.demo.service.TransactionService;
 
@@ -25,6 +29,7 @@ public class TransactionController {
 	TransactionService trans;
 	@RequestMapping(path="/getTransactions")
 	@ResponseBody
+<<<<<<< HEAD
 	public String getAllTransaction(String fromDate,String toDate,String acno){
 
 		 	
@@ -42,6 +47,25 @@ public class TransactionController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+=======
+	public String getAllTransaction(Date date1,Date date2,long acno){
+
+		 	
+//		  Date date1 = null;
+//		try {
+//			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(fromDate);
+//		} catch (ParseException e) {
+//			
+//			e.printStackTrace();
+//		}  
+//		  Date date2 = null;
+//		try {
+//			date2 = new SimpleDateFormat("dd/MM/yyyy").parse(toDate);
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+>>>>>>> ritik
 		
 		String res="";
 		List<Transaction> transaction=trans.getTransactionHistory(date1, date2, acno);
@@ -58,6 +82,7 @@ public class TransactionController {
 	
 	@RequestMapping(path="/ministatement")
 	@ResponseBody
+<<<<<<< HEAD
 	public String getMiniStatement(long accNumber) {
 		
 		List<Transaction> transaction=  trans.getMiniStatement( accNumber);
@@ -71,6 +96,21 @@ public class TransactionController {
 					
 			}
 			return res;
+=======
+	public String getMiniStatement( Long accNumber) {
+		
+//		List<Transaction> transaction=  trans.getMiniStatement( accNumber.longValue());
+		String res="";
+//		 Iterator <Transaction> ts =transaction.iterator(); 
+//			
+//		 while(ts.hasNext())
+//			{
+//			 
+//			 res =res+ " "+(ts.next().getTransactionId()); 
+//					
+//			}
+			return res+accNumber.longValue();
+>>>>>>> ritik
 			
 			
 
@@ -96,7 +136,10 @@ public class TransactionController {
 		
 	String res="Working";
 		return res;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ritik
 	}
 	@RequestMapping(path="/Withdraw")
 	@ResponseBody
@@ -105,7 +148,10 @@ public class TransactionController {
 		trans.WithdrawBalance(toAccount, transactionBalance);
 	String res="Working";
 		return res;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ritik
 	}
 	
 */
@@ -134,4 +180,8 @@ public class TransactionController {
 	
 	
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ritik
