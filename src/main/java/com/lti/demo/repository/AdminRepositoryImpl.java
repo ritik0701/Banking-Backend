@@ -1,3 +1,4 @@
+
 package com.lti.demo.repository;
 
 import javax.persistence.EntityManager;
@@ -41,4 +42,4 @@ public class AdminRepositoryImpl implements AdminRepository {
 		// TODO Auto-generated method stub
 		
 	}
-}	
+}

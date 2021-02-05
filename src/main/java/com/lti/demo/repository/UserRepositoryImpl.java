@@ -1,5 +1,9 @@
 package com.lti.demo.repository;
+<<<<<<< HEAD
+
+=======
 import java.util.List;
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd
 import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -74,6 +78,9 @@ public class UserRepositoryImpl implements UserRepository {
 	
 	
 	
+<<<<<<< HEAD
+}
+=======
 }
 	
 
@@ -142,3 +149,4 @@ public class UserRepositoryImpl implements UserRepository {
 		return (Long)em.createQuery("getAcc").setParameter("accNumber", accNumber)
 				.getSingleResult()==1 ? true : false;
 	}*/
+>>>>>>> 9ba854cf10755f54109d0b5213695e6e994292dd

@@ -1,35 +1,26 @@
 package com.lti.demo.pojo;
-
-import javax.persistence.*;
-
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
-@Table(name="ADMIN")
-public class Admin  {
-	
-	@Id
-	@SequenceGenerator(name="USERID_GENERATOR", sequenceName="USER_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERID_GENERATOR")
-	@Column(name="USER_ID")
-	private long userId;
-
-	@Column(name = "pass")
-	private String pass;
-
-	public long getUserId() {
-		return this.userId;
+@Table(name="Admin")
+public class Admin 
+{@Id
+	@Column(length = 20, nullable = false)
+	private String UserId;
+	@Column(length = 20, nullable = false)
+	private String Password;
+	public String getUserId() {
+		return UserId;
 	}
-
-	public void setUserId(long userId) {
-		this.userId = userId;
+	public void setUserId(String userId) {
+		UserId = userId;
 	}
-
-	public String getPass() {
-		return this.pass;
+	public String getPassword() {
+		return Password;
 	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setPassword(String password) {
+		Password = password;
 	}
-
 }

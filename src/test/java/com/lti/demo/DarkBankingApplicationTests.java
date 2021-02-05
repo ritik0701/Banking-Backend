@@ -1,30 +1,11 @@
 package com.lti.demo;
 
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.lti.demo.pojo.Account;
-import com.lti.demo.pojo.Admin;
-import com.lti.demo.pojo.Beneficiary;
-import com.lti.demo.pojo.User;
-import com.lti.demo.pojo.Transaction;
-
-import com.lti.demo.repository.AccountRepositoryImpl;
-import com.lti.demo.repository.AdminRepositoryImpl;
-import com.lti.demo.repository.BeneficiaryRepositoryImpl;
-import com.lti.demo.repository.TransactionRepositoryImpl;
-import com.lti.demo.repository.UserRepositoryImpl;
-
 
 @SpringBootTest
 class DarkBankingApplicationTests {
+
 
 	//Ritik-------------------------------------------------------------------------------
 	
@@ -176,9 +157,10 @@ class DarkBankingApplicationTests {
 	void saveBeneficiary() {
 		
 		Beneficiary beneficiary = new Beneficiary();
+		beneficiary.setBeneficiaryId(11111);
 		beneficiary.setBankIfsc("HDFC3498");
-		beneficiary.setBeneficiaryAccNo(432589898);
-		beneficiary.setBeneficiaryName("Deepraj");
+		beneficiary.setBeneficiaryAccNo(432589890);
+		beneficiary.setBeneficiaryName("Aadaish");
 		beneficiary.setDateAdded(new Date());
 		beneficiary.setUser(userrepo.findUserById(10000));
 		
@@ -213,6 +195,7 @@ class DarkBankingApplicationTests {
 			
 	}
 	
+<<<<<<< HEAD
 	@Test
 	void SaveTransaction() {
 		
@@ -228,41 +211,7 @@ class DarkBankingApplicationTests {
 		transrepo.save(t1);
 		
 	}
+=======
+>>>>>>> Aadish
 
-	
-	@Test
-	void GetbetweenTransaction() {
-	
-		System.out.println("running test : transrepo : "+transrepo);
-		List<Transaction> trans; 
-		 String sDate1="31/1/2021";  
-		 String sDate2="3/2/2021";  
-		  Date date1 = null;
-		try {
-			date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  
-		  Date date2 = null;
-		try {
-			date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		trans = transrepo.getTransactionBetweenDates(date1, date2, "100000000");
-		for (Transaction ts : trans) {
-			System.out.println(" Transaction id"+ts.getTransactionId());
-			
-			System.out.println(" Beneficiary Account No."+ts.getBeneficiaryAcctNo());
-			
-		}
-			
-	}
-	@Test
-	void testTransactionid() {
-		System.out.println(transrepo.getTransactionById(90001));
-	}
-	
 }

@@ -6,6 +6,9 @@ public interface AdminRepository {
 	
 	
 	Admin getAdminById(long userId);
+	
 	String getPasswordById(long userId);
+	
 	boolean isAdminAvailable(long userId);
+
 }
