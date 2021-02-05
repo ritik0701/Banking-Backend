@@ -3,9 +3,11 @@ import java.util.List;
 import java.math.BigDecimal;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+
 
 import com.lti.demo.pojo.User;
 
@@ -52,25 +54,74 @@ public class UserRepositoryImpl implements UserRepository {
 	public User findUserById(long userId) {	
 		return em.find(User.class,userId);
 	}
-	
+	/*
 	//get user by accno
 	@Override
 	@Transactional
-	public User getUserByAccountNumber(long accNumber) {
-		String queryString ="select * from Users u where u.acc_no=:accNumber";
-		return (User) em.createNativeQuery(queryString,User.class).setParameter("accNumber", accNumber).getSingleResult();
+	public long getUserByAccNumber(long accNumber) {
+		String queryString ="select u.user_id from Users u where u.acc_no=:accNumber";
+		return (long)em.createNativeQuery(queryString,User.class).setParameter("accNumber", accNumber).getSingleResult();
 	}
+	*/
+	//get user by accno
+		@Override
+		@Transactional
+		public User getUserByAccNumber(long accNumber) {
+			String queryString ="select * from Users u where u.acc_no=:accNumber";
+			return (User)em.createNativeQuery(queryString,User.class).setParameter("accNumber", accNumber).getSingleResult();
+		}
 	
 	//get trans pass  by userId
 	@Override
 	@Transactional
-	public BigDecimal getTransactionPassword(long userId) {
+	public long getTransactionPassword(long fromAccNumber) {
 		// TODO Auto-generated method stub
-				String queryString ="select u.transaction_Password from Users u where u.user_id=:userId";
-				return (BigDecimal)em.createNativeQuery(queryString)
-						.setParameter("userId",userId).getSingleResult();
+				System.out.println(fromAccNumber);
+				String queryString ="select u.transaction_Password from Users u where u.acc_no=:accNumber";
+				return (long)em.createNativeQuery(queryString)
+						.setParameter("accNumber",fromAccNumber).getSingleResult();
 	}
 
+	@Override
+	@Transactional
+	public void resetPassword(long userId, String updatedPassword) {
+		String queryString ="update Users set pass=:password where user_id=:id";
+		em.createNativeQuery(queryString)
+		.setParameter("id",userId)
+		.setParameter("password",updatedPassword)
+		.executeUpdate();
+	}
+	@Override
+	@Transactional
+	public void resetTransactionPassword(long userId, int updatedPassword) {
+		System.out.println(userId);
+		System.out.println(updatedPassword);
+		String queryString="update Users set transaction_Password=:password where user_id=:id";
+		em.createNativeQuery(queryString)
+		.setParameter("id",userId)
+		.setParameter("password",updatedPassword)
+		.executeUpdate();
+	}
+	@Override
+	@Transactional
+	public boolean isUserPresent() {
+		String queryString="select count(*) from Users";
+		if(((BigDecimal)em.createNativeQuery(queryString).getSingleResult()).equals(BigDecimal.valueOf(1))) 
+			return true;
+		else
+			return false;
+	}
+	
+	@Override
+	@Transactional
+	public List<User> getAllUsers()
+	{
+		String queryString = "Select * from users";
+		
+	    List<User> userlist = em.createNativeQuery(queryString,User.class).getResultList();
+	    return userlist;	
+		
+	}
 	
 	
 	
@@ -80,65 +131,3 @@ public class UserRepositoryImpl implements UserRepository {
 
 
 
-
-/*
- * //reset password
-	
-		@Override
-		@Transactional
-		public void resetPassword(String userId, String updatedPassword) {
-			String queryString ="update Users set pass=:password where user_id=:id";
-			em.createQuery(queryString)
-			.setParameter("id",userId)
-			.setParameter("password",updatedPassword)
-			.executeUpdate();
-		}
- * //reset password
-	
-	@Override
-	@Transactional
-	public void resetPassword(String userId, String updatedPassword) {
-		String queryString ="update Users set pass=:password where user_id=:id";
-		em.createQuery(queryString)
-		.setParameter("id",userId)
-		.setParameter("password",updatedPassword)
-		.executeUpdate();
-	}
-	
-	
-	
-
-	@Override
-	@Transactional
-	public void resetTransactionPassword(String userId, String updatedPassword) {
-		System.out.println(userId);
-		System.out.println(updatedPassword);
-		String queryString="update User set transation_Password=:password where userId=:id";
-		em.createQuery(queryString)
-		.setParameter("id",userId)
-		.setParameter("password",updatedPassword)
-		.executeUpdate();
-	}
- @Override
-	@Transactional
-	public boolean isUserPresent() {
-		String queryString="select count(*) from User";
-		return (Long)em.createQuery(queryString)
-				.getSingleResult()==0 ? true:false;
-	}
-	@Override
-	@Transactional
-	public String getUserId() {
-		// TODO Auto-generated method stub
-				String queryString="select max(u.user_id) from users u";
-				return (String)em.createQuery(queryString)
-						.getSingleResult();
-	}
-	@Override
-	@Transactional
-	public boolean isAccountRegistered(String accNumber) {
-		String queryString="se"
-				+ "lect count(u.userId) from User u where u.accountNumber.accountNumber =:accNumber";
-		return (Long)em.createQuery("getAcc").setParameter("accNumber", accNumber)
-				.getSingleResult()==1 ? true : false;
-	}*/

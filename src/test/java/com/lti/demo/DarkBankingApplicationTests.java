@@ -30,7 +30,7 @@ class DarkBankingApplicationTests {
 	
 	@Autowired
 	AccountRepositoryImpl account;
-	
+
 	@Test
 	void testSetAccountDetails() {
 		Account acc =  new Account();
@@ -59,7 +59,8 @@ class DarkBankingApplicationTests {
 	
 	@Test
 	void testGetAccountDetails() {
-		account.getAccountDetails(100000000);
+		Account acc=account.getAccountDetails(100000000);
+		System.out.println(acc.getAccNo());
 	}
 	
 	@Test 
@@ -93,7 +94,7 @@ class DarkBankingApplicationTests {
 		System.out.println("running test : UserRepo : "+ userrepo );
 		User u1=new User();
 		u1.setPass("user@123");
-		u1.setAccount(null);
+		u1.setAccount(account.getAccountDetails(100000000));
 		u1.setTransaction_Password(1111);
 		userrepo.save(u1);
 		
@@ -109,13 +110,15 @@ class DarkBankingApplicationTests {
 	@Test
 	void getAccno() {
 		System.out.println("getting user");
-		userrepo.getUserByAccountNumber(100000000);
+		userrepo.getUserByAccNumber(100000000);
 	}
+	
+	
 	//get Transaction password by accno//working
 	@Test
 	void getTransPass() {
 		System.out.println("getting transaction pass");
-		userrepo.getTransactionPassword(100000000);
+		userrepo.getTransactionPassword(10000);
 	}
 	//validation of user id and pass
 	@Test
@@ -128,7 +131,41 @@ class DarkBankingApplicationTests {
 	{
 		System.out.println(userrepo.isUserValid(500000));
 	}
+	//updatepass
+	@Test
+	void restPassword()
+	{
+		userrepo.resetPassword(500000, "123@user");
+	}
+//update trans pass
+	@Test
+	void restTranPassword()
+	{
+		userrepo.resetTransactionPassword(500000, 1111);
+	}
 	
+//is user present in database
+@Test
+void isUserPresent()
+{
+	System.out.println(userrepo.isUserPresent());
+	}
+	
+//get all user
+	@Test
+	void getAlluser()
+	{
+		System.out.println("running test : userrepo"+userrepo);
+		List<User> user; 
+	    user = userrepo.getAllUsers();
+		for (User User : user) {
+			System.out.println("User id:"+User.getUserId());
+			System.out.println("Password:"+User.getPass());
+			System.out.println("Accno:"+User.getAccount());
+			System.out.println("Transaction pass:"+User.getTransaction_Password());
+	}
+	}
+		
 	//AAdish---------------------------------------------------------------------------------------
 	
 	@Autowired

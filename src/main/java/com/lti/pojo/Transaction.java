@@ -1,6 +1,9 @@
 package com.lti.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.lti.demo.pojo.User;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
