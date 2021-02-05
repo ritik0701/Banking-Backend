@@ -155,9 +155,10 @@ class DarkBankingApplicationTests {
 	void saveBeneficiary() {
 		
 		Beneficiary beneficiary = new Beneficiary();
+		beneficiary.setBeneficiaryId(11111);
 		beneficiary.setBankIfsc("HDFC3498");
-		beneficiary.setBeneficiaryAccNo(432589898);
-		beneficiary.setBeneficiaryName("Deepraj");
+		beneficiary.setBeneficiaryAccNo(432589890);
+		beneficiary.setBeneficiaryName("Aadaish");
 		beneficiary.setDateAdded(new Date());
 		beneficiary.setUser(userrepo.findUserById(10000));
 		
