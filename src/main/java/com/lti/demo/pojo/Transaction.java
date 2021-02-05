@@ -2,6 +2,8 @@ package com.lti.demo.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -95,23 +97,16 @@ public class Transaction implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-<<<<<<< HEAD
-	
 
-	public String getTransactionType() {
-		return transactionType;
-	}
 
-	public void setTransactionType(String transactionType) {
-		this.transactionType = transactionType;
-=======
+    @JsonIgnore
 	public Account getAccount() {
 		return this.account;
 	}
 
 	public void setAccount(Account account) {
 		this.account = account;
->>>>>>> master
+
 	}
 
 	public String getTransactionType() {

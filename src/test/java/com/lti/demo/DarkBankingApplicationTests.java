@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.repository.query.Param;
 
 import com.lti.demo.pojo.Account;
-<<<<<<< HEAD
-import com.lti.demo.pojo.Transaction;
-import com.lti.demo.pojo.User;
-import com.lti.demo.repository.AccountRepositoryImpl;
-import com.lti.demo.repository.AdminRepositoryImpl;
-import com.lti.demo.repository.TransactionRepositoryImpl;
-=======
 import com.lti.demo.pojo.Admin;
 import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.pojo.User;
@@ -29,26 +23,15 @@ import com.lti.demo.repository.AdminRepositoryImpl;
 import com.lti.demo.repository.BeneficiaryRepositoryImpl;
 import com.lti.demo.repository.TransactionRepositoryImpl;
 import com.lti.demo.repository.UserRepositoryImpl;
->>>>>>> master
+
 
 
 @SpringBootTest
 class DarkBankingApplicationTests {
 
-<<<<<<< HEAD
-	@Autowired
-	AdminRepositoryImpl a;
-	@Autowired
-	TransactionRepositoryImpl transrepo;
-	
 
-	@Test
-	void testUserid() {
-		a.getAdminById(1001);
-	}
-=======
 	//Ritik-------------------------------------------------------------------------------
->>>>>>> master
+
 	
 	@Autowired
 	AccountRepositoryImpl account;
@@ -78,9 +61,7 @@ class DarkBankingApplicationTests {
 		acc.setUser(null);
 		account.openAccount(acc);
 	}
-<<<<<<< HEAD
-=======
-	
+
 	@Test
 	void testGetAccountDetails() {
 		account.getAccountDetails(100000000);
@@ -117,7 +98,7 @@ class DarkBankingApplicationTests {
 		System.out.println("running test : UserRepo : "+ userrepo );
 		User u1=new User();
 		u1.setPass("user@123");
-		u1.setAccount(null);
+		u1.setAccount(account.getAccountDetails(1000000000));
 		u1.setTransaction_Password(1111);
 		userrepo.save(u1);
 		
@@ -132,14 +113,15 @@ class DarkBankingApplicationTests {
 	//get user By Accno//working
 	@Test
 	void getAccno() {
+		
 		System.out.println("getting user");
-		userrepo.getUserByAccountNumber(100000000);
+		 userrepo.getUserByAccountNumber(100000000);
 	}
 	//get Transaction password by accno//working
 	@Test
 	void getTransPass() {
 		System.out.println("getting transaction pass");
-		userrepo.getTransactionPassword(100000000);
+		userrepo.getTransactionPassword(10000);
 	}
 	//validation of user id and pass
 	@Test
@@ -200,23 +182,22 @@ class DarkBankingApplicationTests {
 	@Autowired
 	TransactionRepositoryImpl transrepo;
 	
->>>>>>> master
+
 	@Test
 	void GetAllTransaction() {
 	
 		System.out.println("running test : transrepo : "+transrepo);
-<<<<<<< HEAD
-		List<Transaction> trans; 
-=======
+
 		List< Transaction > trans; 
->>>>>>> master
+
 		
 		trans = transrepo.getAllRecords(100000000);
-		for (Transaction ts : trans) {
-			System.out.println(" Transaction id"+ts.getTransactionId());
-			
-			System.out.println(" Beneficiary Account No."+ts.getBeneficiaryAcctNo());
-			
+	
+	 Iterator <Transaction> ts = trans.iterator(); 
+		while(ts.hasNext())
+		{
+			System.out.println(ts.next());
+				
 		}
 			
 	}
@@ -224,33 +205,7 @@ class DarkBankingApplicationTests {
 	@Test
 	void SaveTransaction() {
 		
-<<<<<<< HEAD
-		
-		System.out.println("running test : TransRepo : "+ transrepo );
-		Transaction t1 =  new Transaction();
-		t1.setTransactionId(9004);
-		Account a = new Account();
-		User u = new User();
-		a.setAccNo(100000000);
-	     //u.getAccount();
-		//t1.setUser(u);
-	//	u.getAccount();
-		//t1.setUser(u);
-		
-	//	t1.setDbOrCr("db");
-		Date date =new Date();
-	//	date.getDate();
-	//	@Param("datetime") Date datetime);
-		t1.setTransactionDate(date);
-		t1.setBeneficiaryName("b1");
-		t1.setTransactionAmount(BigDecimal.valueOf(500));
-		t1.setTransactionType("Neft");
-		t1.setBeneficiaryAcctNo(BigDecimal.valueOf(987654321));
-		
-		transrepo.save(t1);
-		
-	}
-=======
+
 		System.out.println("running test : TransRepo : "+ transrepo );
 		Transaction t1 =  new Transaction();
 		t1.setAccount(account.getAccountDetails(100000000));
@@ -265,16 +220,13 @@ class DarkBankingApplicationTests {
 	}
 
 	
->>>>>>> master
+
 	@Test
 	void GetbetweenTransaction() {
 	
 		System.out.println("running test : transrepo : "+transrepo);
 		List<Transaction> trans; 
-<<<<<<< HEAD
-		Date date =new Date();
-		trans = transrepo.getTransactionBetweenDates("31-DEC-20", "03-FEB-21", "100000000");
-=======
+
 		 String sDate1="31/1/2021";  
 		 String sDate2="3/2/2021";  
 		  Date date1 = null;
@@ -292,7 +244,7 @@ class DarkBankingApplicationTests {
 			e.printStackTrace();
 		} 
 		trans = transrepo.getTransactionBetweenDates(date1, date2, "100000000");
->>>>>>> master
+
 		for (Transaction ts : trans) {
 			System.out.println(" Transaction id"+ts.getTransactionId());
 			
@@ -303,21 +255,17 @@ class DarkBankingApplicationTests {
 	}
 	@Test
 	void testTransactionid() {
-<<<<<<< HEAD
-		transrepo.getTransactionById(9001);
-	}
-	@Test 
-	void isEmpty() {
-		transrepo.isTransactionPresent();
-	} 
-	@Test
-	void findtrans()
-	{
-		transrepo.getTransactionId();
-	}
-=======
-		System.out.println(transrepo.getTransactionById(90001));
+		
+		
+		
+     Transaction t =new Transaction();
+
+		
+		 t=transrepo.getTransactionById(90001);
+	System.out.println(t.getTransactionType()+" Transaction type");
+	 
+	
 	}
 	
->>>>>>> master
+
 }
