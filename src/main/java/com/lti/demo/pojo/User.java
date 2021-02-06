@@ -20,7 +20,7 @@ public class User implements Serializable {
 	@SequenceGenerator(name="USERS_USERID_GENERATOR", sequenceName="USER_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERS_USERID_GENERATOR")
 	@Column(name="USER_ID")
-	private long userId;
+	private Long userId;
 
 	private String pass;
 
@@ -31,17 +31,17 @@ public class User implements Serializable {
 	private Account account;
 	
 	@Column(name="transaction_Password",nullable=false)
-	private int transactionPassword;
+	private Integer transactionPassword;
 	
 	//bi-directional many-to-one association to Beneficiary
 	@OneToMany(mappedBy="user")
 	private List<Beneficiary> beneficiaries;
 	
-	public long getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -61,11 +61,11 @@ public class User implements Serializable {
 		this.account = account;
 	}
 
-	public int getTransaction_Password() {
+	public Integer getTransaction_Password() {
 		return transactionPassword;
 	}
 
-	public void setTransaction_Password(int transaction_Password) {
+	public void setTransaction_Password(Integer transaction_Password) {
 		this.transactionPassword = transaction_Password;
 	}
 	

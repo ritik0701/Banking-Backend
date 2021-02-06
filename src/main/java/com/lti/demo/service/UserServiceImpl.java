@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	
 	
 		@Override
-		public User loginUser(long userId, String password) {
+		public User loginUser(Long userId, String password) {
 			Boolean var1=repo.isUserValid(userId);
 			if(var1=Boolean.FALSE)
 			{	
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		
 		
 		@Override
-		public String resetPassword(long userId, String updatedPassword) {
+		public String resetPassword(Long userId, String updatedPassword) {
 			// TODO Auto-generated method stub
 			Boolean var=repo.isUserValid(userId);
 			if(var=Boolean.FALSE)
@@ -55,8 +55,8 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		@Override
-		public int resetTransactionPassword(long userId, int updatedPassword) {
-			// TODO Auto-generated method stub
+		public int resetTransactionPassword(Long userId, Integer updatedPassword) {
+	// TODO Auto-generated method stub
 			Boolean var=repo.isUserValid(userId);
 			if(var=Boolean.FALSE)
 			{
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 			return updatedPassword;
 		}
 		@Override
-		public User getUserId(long accNumber) {
+		public User getUserId(Long accNumber) {
 			// TODO Auto-generated method stub
 			try {
 				return repo.getUserByAccNumber(accNumber);
