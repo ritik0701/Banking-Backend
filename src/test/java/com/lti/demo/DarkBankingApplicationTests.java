@@ -30,6 +30,7 @@ class DarkBankingApplicationTests {
 	@Autowired
 	AccountRepositoryImpl accountRepo;
 	
+
 	@Test
 	void testSetAccountDetails() {
 		Account acc =  new Account();
@@ -80,6 +81,7 @@ class DarkBankingApplicationTests {
 			  + ", account_status : "+ account.getAccountStatus()
 			  + ", admin_remark : "+ account.getAdminRemark() ;
 		System.out.print(res);
+
 	}
 	
 	@Test 
@@ -113,7 +115,7 @@ class DarkBankingApplicationTests {
 		System.out.println("running test : UserRepo : "+ userrepo );
 		User u1=new User();
 		u1.setPass("user@123");
-		u1.setAccount(null);
+		u1.setAccount(accountRepo.getAccountDetails(100000000));
 		u1.setTransaction_Password(1111);
 		userrepo.save(u1);
 		
@@ -123,32 +125,68 @@ class DarkBankingApplicationTests {
 	@Test
 	void getUserbyId()
 	{
-	System.out.println(userrepo.findUserById(10000));
+	System.out.println(userrepo.findUserById((long) 10000));
 	}
 	//get user By Accno//working
 	@Test
 	void getAccno() {
 		System.out.println("getting user");
-		userrepo.getUserByAccNumber(100000000);
+		userrepo.getUserByAccNumber((long) 100000000);
 	}
+	
+	
 	//get Transaction password by accno//working
 	@Test
 	void getTransPass() {
 		System.out.println("getting transaction pass");
-		userrepo.getTransactionPassword(100000000);
+		userrepo.getTransactionPassword((long) 10000);
 	}
 	//validation of user id and pass
 	@Test
 	void validUserIdPassword()
 	{
-		System.out.println(userrepo.validUserIdPassword(500000, "user@123"));
+		System.out.println(userrepo.validUserIdPassword((long) 500000, "user@123"));
 	}
 	@Test
 	void isUserValid() 
 	{
-		System.out.println(userrepo.isUserValid(500000));
+		System.out.println(userrepo.isUserValid((long) 500000));
+	}
+	//updatepass
+	@Test
+	void restPassword()
+	{
+		userrepo.resetPassword((long) 500000, "123@user");
+	}
+//update trans pass
+	@Test
+	void restTranPassword()
+	{
+		userrepo.resetTransactionPassword((long) 500000, 1111);
 	}
 	
+//is user present in database
+@Test
+void isUserPresent()
+{
+	System.out.println(userrepo.isUserPresent());
+	}
+	
+//get all user
+	@Test
+	void getAlluser()
+	{
+		System.out.println("running test : userrepo"+userrepo);
+		List<User> user; 
+	    user = userrepo.getAllUsers();
+		for (User User : user) {
+			System.out.println("User id:"+User.getUserId());
+			System.out.println("Password:"+User.getPass());
+			System.out.println("Accno:"+User.getAccount());
+			System.out.println("Transaction pass:"+User.getTransaction_Password());
+	}
+	}
+		
 	//AAdish---------------------------------------------------------------------------------------
 	
 	@Autowired
@@ -179,7 +217,7 @@ class DarkBankingApplicationTests {
 		beneficiary.setBeneficiaryAccNo((long) 432589898);
 		beneficiary.setBeneficiaryName("Deepraj");
 		beneficiary.setDateAdded(new Date());
-		beneficiary.setUser(userrepo.findUserById(10000));
+		beneficiary.setUser(userrepo.findUserById((long) 10000));
 		
 		br.save(beneficiary);
 	}
