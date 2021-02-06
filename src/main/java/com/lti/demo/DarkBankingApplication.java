@@ -9,7 +9,6 @@ public class DarkBankingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DarkBankingApplication.class, args);
 		System.out.println("Banking app working");
-		
 	}
 
 }

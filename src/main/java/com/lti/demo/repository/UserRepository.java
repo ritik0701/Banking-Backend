@@ -7,14 +7,14 @@ import com.lti.demo.pojo.User;
 
 public interface UserRepository {
 	void save(User user);
-	User findUserById(long userId);
+	User findUserById(Long userId);
 	List<User> getAllUsers();
-	User getUserByAccNumber(long accNumber);
-	long getTransactionPassword(long fromAccNumber);
-	boolean validUserIdPassword(long userId, String password);
-	boolean isUserValid(long userId);
-	void resetPassword(long userId,String updatedPassword);
-	void resetTransactionPassword(long userId,int updatedPassword);
+	User getUserByAccNumber(Long accNumber);
+	long getTransactionPassword(Long fromAccNumber);
+	boolean validUserIdPassword(Long userId, String password);
+	boolean isUserValid(Long userId);
+	void resetPassword(Long userId,String updatedPassword);
+	void resetTransactionPassword(Long userId,Integer updatedPassword);
 	boolean isUserPresent();
 
 	//void resetPassword(String userId,String updatedPassword);

@@ -104,13 +104,14 @@ class DarkBankingApplicationTests {
 	@Test
 	void getUserbyId()
 	{
-	System.out.println(userrepo.findUserById(10000));
+	System.out.println(userrepo.findUserById((long) 10000));
 	}
 	//get user By Accno//working
 	@Test
 	void getAccno() {
 		System.out.println("getting user");
-		userrepo.getUserByAccNumber(100000000);
+		userrepo.getUserByAccNumber((long) 100000000);
+		//userrepo.getUserByAccNumber(100000000);
 	}
 	
 	
@@ -118,30 +119,30 @@ class DarkBankingApplicationTests {
 	@Test
 	void getTransPass() {
 		System.out.println("getting transaction pass");
-		userrepo.getTransactionPassword(10000);
+		userrepo.getTransactionPassword((long) 10000);
 	}
 	//validation of user id and pass
 	@Test
 	void validUserIdPassword()
 	{
-		System.out.println(userrepo.validUserIdPassword(500000, "user@123"));
+		System.out.println(userrepo.validUserIdPassword((long) 500000, "user@123"));
 	}
 	@Test
 	void isUserValid() 
 	{
-		System.out.println(userrepo.isUserValid(500000));
+		System.out.println(userrepo.isUserValid((long) 500000));
 	}
 	//updatepass
 	@Test
 	void restPassword()
 	{
-		userrepo.resetPassword(500000, "123@user");
+		userrepo.resetPassword((long) 500000, "123@user");
 	}
 //update trans pass
 	@Test
 	void restTranPassword()
 	{
-		userrepo.resetTransactionPassword(500000, 1111);
+		userrepo.resetTransactionPassword((long) 500000, 1111);
 	}
 	
 //is user present in database
@@ -196,7 +197,7 @@ void isUserPresent()
 		beneficiary.setBeneficiaryAccNo(432589898);
 		beneficiary.setBeneficiaryName("Deepraj");
 		beneficiary.setDateAdded(new Date());
-		beneficiary.setUser(userrepo.findUserById(10000));
+		beneficiary.setUser(userrepo.findUserById((long) 10000));
 		
 		br.save(beneficiary);
 	}
