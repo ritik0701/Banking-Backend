@@ -156,14 +156,14 @@ class DarkBankingApplicationTests {
 	
 	@Test
 	void getAdmin() {
-		ar.getAdminById(1001);
+		ar.getAdminById((long) 1001);
 		System.out.println("running test : AdminRepo :" +ar);
 	
 	}
 	
 	@Test
 	void getAdminPassword() {
-		System.out.println(ar.getPasswordById(1001));
+		System.out.println(ar.getPasswordById((long) 1001));
 	
 	}
 	
@@ -176,7 +176,7 @@ class DarkBankingApplicationTests {
 		
 		Beneficiary beneficiary = new Beneficiary();
 		beneficiary.setBankIfsc("HDFC3498");
-		beneficiary.setBeneficiaryAccNo(432589898);
+		beneficiary.setBeneficiaryAccNo((long) 432589898);
 		beneficiary.setBeneficiaryName("Deepraj");
 		beneficiary.setDateAdded(new Date());
 		beneficiary.setUser(userrepo.findUserById(10000));
@@ -186,7 +186,7 @@ class DarkBankingApplicationTests {
 	
 	@Test
 	void getBeneficiary() {
-		System.out.println(br.getBeneficiaryList(10000));
+		System.out.println(br.getBeneficiaryList((long) 10000));
 }
 	
 	//Deepraj------------------------------------------------------------------------------------

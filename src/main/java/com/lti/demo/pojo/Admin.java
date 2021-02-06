@@ -11,16 +11,16 @@ public class Admin  {
 	@SequenceGenerator(name="USERID_GENERATOR", sequenceName="USER_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USERID_GENERATOR")
 	@Column(name="USER_ID")
-	private long userId;
+	private Long userId;
 
 	@Column(name = "pass")
 	private String pass;
 
-	public long getUserId() {
+	public Long getUserId() {
 		return this.userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

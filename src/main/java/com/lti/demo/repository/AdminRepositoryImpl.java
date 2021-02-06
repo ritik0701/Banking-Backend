@@ -24,7 +24,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 
 	@Transactional
 	public boolean isAdminAvailable(long userId) {
-		return (Long) entityManager.createNativeQuery("select count(a.user_id) from Admin a where a.user_id = :userid")
+		return (long) entityManager.createNativeQuery("select count(a.user_id) from Admin a where a.user_id = :userid")
 				.setParameter("userid", userId).getSingleResult() == 1 ? true : false;
 	}
 
@@ -36,4 +36,5 @@ public class AdminRepositoryImpl implements AdminRepository {
 	}
 
 
+	
 }

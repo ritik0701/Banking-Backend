@@ -37,7 +37,6 @@ public class BeneficiaryRepositoryImpl implements BeneficiaryRepository {
 		
 	}
 	
-	
 
-	
 }
+
