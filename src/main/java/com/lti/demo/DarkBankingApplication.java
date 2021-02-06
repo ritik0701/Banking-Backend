@@ -8,11 +8,9 @@ public class DarkBankingApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DarkBankingApplication.class, args);
-<<<<<<< HEAD
+
 		System.out.println("Bank app working");
-=======
-		System.out.println("Hello world..");
->>>>>>> ritik
+
 	}
 
 }

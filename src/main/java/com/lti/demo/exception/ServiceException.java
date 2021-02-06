@@ -27,8 +27,4 @@ public class ServiceException extends RuntimeException{
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> ritik

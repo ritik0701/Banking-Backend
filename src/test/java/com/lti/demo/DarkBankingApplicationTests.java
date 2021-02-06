@@ -118,7 +118,7 @@ class DarkBankingApplicationTests {
 		System.out.println("running test : UserRepo : "+ userrepo );
 		User u1=new User();
 		u1.setPass("user@123");
-		u1.setAccount(account.getAccountDetails(1000000000));
+		u1.setAccount(accountRepo.getAccountDetails(1000000000));
 		u1.setTransaction_Password(1111);
 		userrepo.save(u1);
 		
@@ -135,11 +135,9 @@ class DarkBankingApplicationTests {
 	void getAccno() {
 		
 		System.out.println("getting user");
-<<<<<<< HEAD
-		 userrepo.getUserByAccountNumber(100000000);
-=======
+
 		userrepo.getUserByAccNumber(100000000);
->>>>>>> ritik
+
 	}
 	//get Transaction password by accno//working
 	@Test
@@ -267,12 +265,9 @@ class DarkBankingApplicationTests {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-<<<<<<< HEAD
-		trans = transrepo.getTransactionBetweenDates(date1, date2, "100000000");
 
-=======
 		trans = transrepo.getTransactionBetweenDates(date1, date2, 100000000);
->>>>>>> ritik
+
 		for (Transaction ts : trans) {
 			System.out.println(" Transaction id"+ts.getTransactionId());
 			
@@ -295,9 +290,6 @@ class DarkBankingApplicationTests {
 	
 	}
 	
-<<<<<<< HEAD
+
 
 }
-=======
-}
->>>>>>> ritik

@@ -44,13 +44,10 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	
 	@Override
 	public Transaction getTransactionById(long transactionId) {
-<<<<<<< HEAD
+
 		return em.find(Transaction.class, transactionId);
 
-=======
-		String qr="select * from Transactions where transaction_Id = :transactionId"; 
-		return  (Transaction) em.createNativeQuery(qr,Transaction.class).setParameter("transactionId",transactionId).getSingleResult();
->>>>>>> ritik
+
 	}
 
 }
