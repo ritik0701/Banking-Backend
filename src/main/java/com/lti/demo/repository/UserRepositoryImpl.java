@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 	//validation of user
 	@Override
 	@Transactional
-	public boolean validUserIdPassword(long userId, String password) {
+	public boolean validUserIdPassword(Long userId, String password) {
 		/// TODO Auto-generated method stub
 		String queryString="select count(*) from Users u where u.user_id=:id and u.pass=:password";
 		if(((BigDecimal)em.createNativeQuery(queryString).setParameter("id", userId).setParameter("password", password).getSingleResult()).equals(BigDecimal.valueOf(1)))
@@ -41,7 +41,7 @@ public class UserRepositoryImpl implements UserRepository {
 	//uservalidation
 	@Override
 	@Transactional
-	public boolean isUserValid(long userId) {
+	public boolean isUserValid(Long userId) {
 		String queryString="select count(u.user_id) from Users u where u.user_id=:id";
 		if(((BigDecimal)em.createNativeQuery(queryString).setParameter("id",userId).getSingleResult()).equals(BigDecimal.valueOf(0)))
 			return true;
@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserRepository {
 //get users by id
 	@Override
 	@Transactional
-	public User findUserById(long userId) {	
+	public User findUserById(Long userId) {	
 		return em.find(User.class,userId);
 	}
 	/*
@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
 	//get user by accno
 		@Override
 		@Transactional
-		public User getUserByAccNumber(long accNumber) {
+		public User getUserByAccNumber(Long accNumber) {
 			String queryString ="select * from Users u where u.acc_no=:accNumber";
 			return (User)em.createNativeQuery(queryString,User.class).setParameter("accNumber", accNumber).getSingleResult();
 		}
@@ -74,7 +74,8 @@ public class UserRepositoryImpl implements UserRepository {
 	//get trans pass  by userId
 	@Override
 	@Transactional
-	public long getTransactionPassword(long fromAccNumber) {
+
+	public long getTransactionPassword(Long fromAccNumber) {
 		// TODO Auto-generated method stub
 				System.out.println(fromAccNumber);
 				String queryString ="select u.transaction_Password from Users u where u.acc_no=:accNumber";
@@ -84,7 +85,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	@Transactional
-	public void resetPassword(long userId, String updatedPassword) {
+	public void resetPassword(Long userId, String updatedPassword) {
 		String queryString ="update Users set pass=:password where user_id=:id";
 		em.createNativeQuery(queryString)
 		.setParameter("id",userId)
@@ -93,7 +94,9 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 	@Override
 	@Transactional
-	public void resetTransactionPassword(long userId, int updatedPassword) {
+
+	public void resetTransactionPassword(Long userId, Integer updatedPassword) {
+
 		System.out.println(userId);
 		System.out.println(updatedPassword);
 		String queryString="update Users set transaction_Password=:password where user_id=:id";
@@ -124,5 +127,5 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 	
 	
-	
 }
+	
