@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,9 @@ import com.lti.demo.repository.UserRepositoryImpl;
 @SpringBootTest
 class DarkBankingApplicationTests {
 
+
 	//Ritik-------------------------------------------------------------------------------
+
 	
 	@Autowired
 	AccountRepositoryImpl accountRepo;
@@ -56,7 +59,7 @@ class DarkBankingApplicationTests {
 		acc.setUser(null);
 		accountRepo.openAccount(acc);
 	}
-	
+
 	@Test
 	void testGetAccountDetails() {
 		Account account = accountRepo.getAccountDetails(100000000);
@@ -130,6 +133,7 @@ class DarkBankingApplicationTests {
 	//get user By Accno//working
 	@Test
 	void getAccno() {
+		
 		System.out.println("getting user");
 		userrepo.getUserByAccNumber((long) 100000000);
 	}
@@ -234,18 +238,22 @@ void isUserPresent()
 	@Autowired
 	TransactionRepositoryImpl transrepo;
 	
+
 	@Test
 	void GetAllTransaction() {
 	
 		System.out.println("running test : transrepo : "+transrepo);
+
 		List< Transaction > trans; 
+
 		
 		trans = transrepo.getAllRecords(100000000);
-		for (Transaction ts : trans) {
-			System.out.println(" Transaction id"+ts.getTransactionId());
-			
-			System.out.println(" Beneficiary Account No."+ts.getBeneficiaryAcctNo());
-			
+	
+	 Iterator <Transaction> ts = trans.iterator(); 
+		while(ts.hasNext())
+		{
+			System.out.println(ts.next());
+				
 		}
 			
 	}
@@ -253,6 +261,7 @@ void isUserPresent()
 	@Test
 	void SaveTransaction() {
 		
+
 		System.out.println("running test : TransRepo : "+ transrepo );
 		Transaction t1 =  new Transaction();
 		t1.setAccount(accountRepo.getAccountDetails(100000000));
@@ -267,11 +276,13 @@ void isUserPresent()
 	}
 
 	
+
 	@Test
 	void GetbetweenTransaction() {
 	
 		System.out.println("running test : transrepo : "+transrepo);
 		List<Transaction> trans; 
+
 		 String sDate1="31/1/2021";  
 		 String sDate2="3/2/2021";  
 		  Date date1 = null;
@@ -288,7 +299,9 @@ void isUserPresent()
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+
 		trans = transrepo.getTransactionBetweenDates(date1, date2, 100000000);
+
 		for (Transaction ts : trans) {
 			System.out.println(" Transaction id"+ts.getTransactionId());
 			
@@ -299,7 +312,18 @@ void isUserPresent()
 	}
 	@Test
 	void testTransactionid() {
-		System.out.println(transrepo.getTransactionById(90001));
+		
+		
+		
+     Transaction t =new Transaction();
+
+		
+		 t=transrepo.getTransactionById(90001);
+	System.out.println(t.getTransactionType()+" Transaction type");
+	 
+	
 	}
 	
+
+
 }

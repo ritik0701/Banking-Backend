@@ -2,6 +2,8 @@ package com.lti.demo.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -42,6 +44,7 @@ public class Transaction implements Serializable {
 	private String transactionType;
 
 	//bi-directional many-to-one association to User
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="acc_no")
 	private Account account;
@@ -95,12 +98,16 @@ public class Transaction implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
+
+
+    @JsonIgnore
 	public Account getAccount() {
 		return this.account;
 	}
 
 	public void setAccount(Account account) {
 		this.account = account;
+
 	}
 
 	public String getTransactionType() {

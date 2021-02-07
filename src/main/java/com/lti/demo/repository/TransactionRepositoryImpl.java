@@ -17,6 +17,7 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 
 	@PersistenceContext
 	private EntityManager em;
+
 	
 	@Override
 	@Transactional
@@ -43,8 +44,10 @@ public class TransactionRepositoryImpl implements TransactionRepository {
 	
 	@Override
 	public Transaction getTransactionById(long transactionId) {
-		String qr="select * from Transactions where transaction_Id = :transactionId"; 
-		return  (Transaction) em.createNativeQuery(qr,Transaction.class).setParameter("transactionId",transactionId).getSingleResult();
+
+		return em.find(Transaction.class, transactionId);
+
+
 	}
 
 }

@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.demo.dto.TransactionDate;
 import com.lti.demo.dto.TransactionDetailsDTO;
+import com.lti.demo.dto.TransactionFind;
+import com.lti.demo.dto.TransactionMiniStatementDTO;
 import com.lti.demo.exception.ServiceException;
 import com.lti.demo.pojo.Account;
 import com.lti.demo.pojo.Transaction;
@@ -52,8 +55,8 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public List<Transaction> getMiniStatement(long accNumber) {
-			List<Transaction> transactions=repo.getAllRecords(accNumber);
+	public List<Transaction> getMiniStatement(TransactionMiniStatementDTO ts) {
+			List<Transaction> transactions=repo.getAllRecords(ts.getAccNo());
 			int size = transactions.size();
 			if(size<=5) {
 				return transactions;
@@ -72,8 +75,11 @@ public class TransactionServiceImpl implements TransactionService {
 	
 
 	@Override
-	public List<Transaction> getTransactionHistory(Date fromDate, Date toDate, long accountNumber) {
-		return repo.getTransactionBetweenDates(fromDate, toDate, accountNumber);
+
+	public List<Transaction> getTransactionHistory(TransactionDate td) {
+		return repo.getTransactionBetweenDates(td.getFromDate(),td.getToDate(),td.getAccNo());
+
+	
 	}
 	@Transactional
 	@Override
@@ -111,14 +117,15 @@ public class TransactionServiceImpl implements TransactionService {
 		repo.save(t);
 	}
 	@Override
-	public Transaction findtransaction(long transactionid) {
+	public Transaction findtransaction(TransactionFind tf) {
 		
-		return repo.getTransactionById(transactionid);
+		return repo.getTransactionById(tf.getTransactionId());
 		
 	}
 	
 
-	
 
 	
+
 }
+
