@@ -5,9 +5,9 @@ package com.lti.demo.service;
 
 	public interface UserService {
 		
-		User loginUser(Long userId, String password);
-		String resetPassword(Long userId, String updatedPassword);
+		Boolean loginUser(Long userId, String password);
+		Boolean resetPassword(Long userId, String updatedPassword);
 		User getUserId(Long accNumber);
-		int resetTransactionPassword(Long userId, Integer updatedPassword);
+		Boolean resetTransactionPassword(Long userId, Integer updatedPassword);
 	}
 

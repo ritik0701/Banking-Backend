@@ -21,49 +21,59 @@ public class UserServiceImpl implements UserService {
 	
 	
 		@Override
-		public User loginUser(Long userId, String password) {
-			Boolean var1=repo.isUserValid(userId);
-			if(var1=Boolean.FALSE)
-			{	
-				
-				throw new ServiceException("User Doesn't Exist");
+		public Boolean loginUser(Long userId, String password)
+		{
+			if((repo.isUserValid(userId))==false)
+			{
+				return false;
 			}
-			else {
-				Boolean var2=repo.validUserIdPassword(userId, password);
-				if(var2=Boolean.FALSE) {
-					
-					throw new ServiceException("Invalid Credentials");
-				}
-				User user = repo.findUserById(userId);
-				return user;
+			else if((repo.validUserIdPassword(userId, password))==false)
+			{
+				return false;
 			}
-		}
-		
-		
-		
-		@Override
-		public String resetPassword(Long userId, String updatedPassword) {
-			// TODO Auto-generated method stub
-			Boolean var=repo.isUserValid(userId);
-			if(var=Boolean.FALSE)
-			{	
-				throw new ServiceException("User Doesn't Exist");
+			else
+			{
+			return true;
 			}
 			
-			repo.resetPassword(userId,updatedPassword);
-			return updatedPassword;
+		}
+		
+		
+		
+		@Override
+		public Boolean resetPassword(Long userId, String updatedPassword) {
+			// TODO Auto-generated method stub
+			
+			if((repo.isUserValid(userId))==false)
+			{	
+				return false;
+			}
+			else if((repo.resetPassword(userId,updatedPassword))==false)
+			{
+			return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 		
 		@Override
-		public int resetTransactionPassword(Long userId, Integer updatedPassword) {
+		public Boolean resetTransactionPassword(Long userId, Integer updatedPassword) {
 	// TODO Auto-generated method stub
-			Boolean var=repo.isUserValid(userId);
-			if(var=Boolean.FALSE)
+		
+			if((repo.isUserValid(userId)==false))
 			{
-				throw new ServiceException("User Doesn't Exist");
+				return false;
 			}
-			repo.resetTransactionPassword(userId,updatedPassword);
-			return updatedPassword;
+			else if((repo.resetTransactionPassword(userId,updatedPassword))==false)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 		@Override
 		public User getUserId(Long accNumber) {

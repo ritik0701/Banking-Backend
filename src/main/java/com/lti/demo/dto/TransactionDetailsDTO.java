@@ -1,12 +1,12 @@
-<<<<<<< HEAD:src/main/java/com/lti/demo/dto/TransactionDetailsDTO.java
+
 package com.lti.demo.dto;
-=======
-package com.lti.pojo;
+
+
 import java.io.Serializable;
 import javax.persistence.*;
 
 import com.lti.demo.pojo.User;
->>>>>>> ketki:src/main/java/com/lti/pojo/Transaction.java
+
 
 import java.math.BigDecimal;
 import java.util.Date;

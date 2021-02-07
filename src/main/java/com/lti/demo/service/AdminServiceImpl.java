@@ -21,10 +21,10 @@ public class AdminServiceImpl implements AdminService{
 		return null;
 	}
 	
-	public boolean getPasswordById(long userId , String password ) {
+	public boolean getPasswordById(long userId , String pass ) {
 		
 		
-		if(repo.getPasswordById(userId).equals(password))
+		if(repo.getPasswordById(userId).equals(pass))
 			return true;
 		
 		else

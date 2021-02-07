@@ -3,6 +3,8 @@ package com.lti.demo.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -27,12 +29,13 @@ public class User implements Serializable {
 	//bi-directional many-to-one association to Transaction
 
 	//bi-directional one-to-one association to Account
+	@JsonIgnore
 	@OneToOne(mappedBy="user")
 	private Account account;
 	
 	@Column(name="transaction_Password",nullable=false)
 	private Integer transactionPassword;
-	
+	@JsonIgnore
 	//bi-directional many-to-one association to Beneficiary
 	@OneToMany(mappedBy="user")
 	private List<Beneficiary> beneficiaries;

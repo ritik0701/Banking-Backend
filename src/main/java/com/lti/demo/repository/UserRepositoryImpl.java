@@ -43,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
 	@Transactional
 	public boolean isUserValid(Long userId) {
 		String queryString="select count(u.user_id) from Users u where u.user_id=:id";
-		if(((BigDecimal)em.createNativeQuery(queryString).setParameter("id",userId).getSingleResult()).equals(BigDecimal.valueOf(0)))
+		if(((BigDecimal)em.createNativeQuery(queryString).setParameter("id",userId).getSingleResult()).equals(BigDecimal.valueOf(1)))
 			return true;
 		else 
 			return false;
@@ -85,17 +85,18 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	@Transactional
-	public void resetPassword(Long userId, String updatedPassword) {
+	public boolean resetPassword(Long userId, String updatedPassword) {
 		String queryString ="update Users set pass=:password where user_id=:id";
 		em.createNativeQuery(queryString)
 		.setParameter("id",userId)
 		.setParameter("password",updatedPassword)
 		.executeUpdate();
+		return true;
 	}
 	@Override
 	@Transactional
 
-	public void resetTransactionPassword(Long userId, Integer updatedPassword) {
+	public boolean resetTransactionPassword(Long userId, Integer updatedPassword) {
 
 		System.out.println(userId);
 		System.out.println(updatedPassword);
@@ -104,6 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
 		.setParameter("id",userId)
 		.setParameter("password",updatedPassword)
 		.executeUpdate();
+		return true;
 	}
 	@Override
 	@Transactional

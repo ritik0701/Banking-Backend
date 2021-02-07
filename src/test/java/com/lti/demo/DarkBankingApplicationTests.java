@@ -145,7 +145,7 @@ class DarkBankingApplicationTests {
 	@Test
 	void validUserIdPassword()
 	{
-		System.out.println(userrepo.validUserIdPassword((long) 500000, "user@123"));
+		System.out.println(userrepo.validUserIdPassword((long) 100, "assword@123"));
 	}
 	@Test
 	void isUserValid() 
@@ -156,13 +156,13 @@ class DarkBankingApplicationTests {
 	@Test
 	void restPassword()
 	{
-		userrepo.resetPassword((long) 500000, "123@user");
+		userrepo.resetPassword((long) 10000, "123@user");
 	}
 //update trans pass
 	@Test
 	void restTranPassword()
 	{
-		userrepo.resetTransactionPassword((long) 500000, 1111);
+		userrepo.resetTransactionPassword((long) 10000, 1111);
 	}
 	
 //is user present in database
