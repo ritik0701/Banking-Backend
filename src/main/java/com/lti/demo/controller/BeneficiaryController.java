@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.lti.demo.dto.AddBeneficiaryDTO;
+import com.lti.demo.dto.FindBeneficiaryDTO;
 import com.lti.demo.pojo.Beneficiary;
 
 import com.lti.demo.service.BeneficiaryService;
@@ -22,17 +23,17 @@ public class BeneficiaryController {
 	 BeneficiaryService beneficiaryService;
 	
 	
-	@RequestMapping(path="/findBeneficiary")
+	@RequestMapping(path="/getBeneficiary")
 	@ResponseBody
-	 List find(long f) {
+	 List find(@RequestBody FindBeneficiaryDTO f) {
 		
-		List<Beneficiary> list = beneficiaryService.getBeneficiaryNameAndAccNo(f);
+		List<Beneficiary> list = beneficiaryService.getBeneficiaryNameAndAccNo(f.getUserId());
 		return list ;
 }
 	
 	@RequestMapping(path="/addBeneficiary")
 	@ResponseBody
-	 void add (@RequestBody Beneficiary b) {
+	 void add (@RequestBody AddBeneficiaryDTO b) {
 		
 		beneficiaryService.addBeneficiary(b);
 		

@@ -3,6 +3,8 @@ package com.lti.demo.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Date;
 
 
@@ -33,6 +35,7 @@ public class Beneficiary implements Serializable {
 	private String beneficiaryName;
 
 	//bi-directional many-to-one association to Account
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

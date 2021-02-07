@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lti.demo.dto.AddBeneficiaryDTO;
 import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.repository.BeneficiaryRepository;
+import com.lti.demo.repository.UserRepositoryImpl;
 
 
 
@@ -17,7 +19,8 @@ public class BeneficiaryServiceImpl implements BeneficiaryService{
 	
 	@Autowired 
 	BeneficiaryRepository repo;
-	
+	@Autowired
+	UserRepositoryImpl u ;
 	
 	@Override
 	public List<Beneficiary> getBeneficiaryNameAndAccNo(long userId){
@@ -26,7 +29,17 @@ public class BeneficiaryServiceImpl implements BeneficiaryService{
 	}
 		
 		@Override
-		public void addBeneficiary(Beneficiary benf) {
-			repo.save(benf);
+		public void addBeneficiary(AddBeneficiaryDTO benf) {
+			
+		
+			Beneficiary b = new Beneficiary();
+			b.setBankIfsc(benf.getBankIfsc());
+			b.setBeneficiaryAccNo(benf.getBeneficiaryAccNo());
+			b.setBeneficiaryName(benf.getBeneficiaryName());
+			b.setDateAdded(benf.getDateAdded());
+//			b.setUser(u.findUserById(benf.getUserId()));
+			
+			repo.save(b);
+			
 		}
 	}

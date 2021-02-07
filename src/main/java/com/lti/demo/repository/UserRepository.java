@@ -13,8 +13,8 @@ public interface UserRepository {
 	long getTransactionPassword(Long fromAccNumber);
 	boolean validUserIdPassword(Long userId, String password);
 	boolean isUserValid(Long userId);
-	void resetPassword(Long userId,String updatedPassword);
-	void resetTransactionPassword(Long userId,Integer updatedPassword);
+	boolean resetPassword(Long userId,String updatedPassword);
+	boolean resetTransactionPassword(Long userId,Integer updatedPassword);
 	boolean isUserPresent();
 
 	

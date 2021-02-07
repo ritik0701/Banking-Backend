@@ -8,5 +8,6 @@ public interface AdminService {
 	Admin adminLogin(long userId , String pass);
 
 	boolean getPasswordById(long userId , String pass);
-	
+
+	public void approveAccountService(long accNo);
 }

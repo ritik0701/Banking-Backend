@@ -16,7 +16,7 @@ import com.lti.demo.pojo.Account;
 import com.lti.demo.service.AccountService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class AccountController {
 
 	@Autowired
