@@ -1,4 +1,3 @@
-
 package com.lti.demo.controller;
 import java.util.List;
 
@@ -11,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.lti.demo.dto.GetUserIdDto;
 import com.lti.demo.dto.LoginUserDto;
 import com.lti.demo.dto.ResetPasswordDto;
 import com.lti.demo.dto.ResetTransPasswordDto;
+import com.lti.demo.dto.StatusDto;
 import com.lti.demo.pojo.Account;
 import com.lti.demo.pojo.User;
 import com.lti.demo.repository.UserRepository;
@@ -39,28 +40,57 @@ public class UserController
 	
 	@RequestMapping(path="/loginUser")
 	@ResponseBody
-	public String loginUser(@RequestBody LoginUserDto loginuser)
+	public StatusDto loginUser(@RequestBody LoginUserDto loginuser)
 	{
-		userserv.loginUser(loginuser.getUserId(), loginuser.getPass());
-		return "user login";
+		StatusDto status=new StatusDto();
+		if((userserv.loginUser(loginuser.getUserId(), loginuser.getPass()))==false)
+		{
+			
+			 status.setStatus("Invalid credentials!!");
+			
+		}
+		else
+		{
+			status.setStatus("Login Successful!!");
+		}
+		return status;
 		
 	}
 	
 	@RequestMapping(path="/resetPass")
 	@ResponseBody
-	public String resetPass(ResetPasswordDto resetpass)
+	public StatusDto resetPass(@RequestBody ResetPasswordDto resetpass)
 	{
-		userserv.resetPassword(resetpass.getUserId(), resetpass.getNewpass());
-		
-		return "pass changed";
+		StatusDto status=new StatusDto();
+		if((userserv.resetPassword(resetpass.getUserId(),resetpass.getUpdatedPassword()))==true)
+		{
+			status.setStatus("User Password Changed!!");
+		}
+		else
+		{
+			status.setStatus("User doesnt exist!!");	
+			
+		}
+		return status;
 	}
 
 	@RequestMapping(path="/resetTransPass")
 	@ResponseBody
-	public String resetTransPass(ResetTransPasswordDto resttranspass)
+	public  StatusDto resetTransPass(@RequestBody ResetTransPasswordDto resettranspass)
 	{
-		userserv.resetTransactionPassword(resttranspass.getUserId(), resttranspass.getNewTranPass());
-		return "Transaction pass changed";
+		StatusDto status=new StatusDto();
+		
+		if((userserv.resetTransactionPassword(resettranspass.getUserId(),resettranspass.getUpdatedPassword()))==true)
+		{
+			status.setStatus("Transaction Password Changed!!");
+		}
+		else
+		{
+			status.setStatus("User doesnt exist!!");	
+			
+		}
+		return status;
+		
 	}
 	
 }

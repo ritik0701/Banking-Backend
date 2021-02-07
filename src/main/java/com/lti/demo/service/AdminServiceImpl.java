@@ -31,4 +31,10 @@ public class AdminServiceImpl implements AdminService{
 			
 			return false;
 	}
+
+	@Override
+	public void approveAccountService(long accNo) {
+		
+		
+	}
 }

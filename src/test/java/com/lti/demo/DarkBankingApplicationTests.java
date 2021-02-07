@@ -205,6 +205,12 @@ void isUserPresent()
 	
 	}
 	
+	@Test
+	void approveAccountService() {
+		ar.approveAccount(100000000);
+	
+	}
+	
 	
 	@Autowired
 	BeneficiaryRepositoryImpl br;

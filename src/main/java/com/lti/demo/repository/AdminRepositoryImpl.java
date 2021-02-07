@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.lti.demo.pojo.Admin;
 
 @Repository
-public class AdminRepositoryImpl implements AdminRepository {
+public  class AdminRepositoryImpl implements AdminRepository {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -35,6 +35,14 @@ public class AdminRepositoryImpl implements AdminRepository {
 				.setParameter("userid", userId).getSingleResult();
 	}
 
-
+	@Override
+	@Transactional
+	public void approveAccount(long accNo) {
+		// TODO Auto-generated method stub
+		entityManager.createNativeQuery("update account set account_status =:status where acc_no =:accNo ")
+		.setParameter("status", "STATUS APPROVED-" )
+		.setParameter("accNo", accNo).executeUpdate();
+	}
+	
 	
 }
