@@ -7,7 +7,7 @@ import com.lti.demo.pojo.Transaction;
 
 public class TransactionDetailsDTO {
 	
-	private BigDecimal beneficiaryAcctNo;
+	private long beneficiaryAcctNo;
 	private String beneficiaryName;
 	private String dbOrCr;
 	private BigDecimal transactionAmount;
@@ -16,11 +16,11 @@ public class TransactionDetailsDTO {
 	private long accNo;
 	
 	
-	public BigDecimal getBeneficiaryAcctNo() {
+	public long getBeneficiaryAcctNo() {
 		return beneficiaryAcctNo;
 	}
-	public void setBeneficiaryAcctNo(BigDecimal beneficiaryAcctNo) {
-		this.beneficiaryAcctNo = beneficiaryAcctNo;
+	public void setBeneficiaryAcctNo(long l) {
+		this.beneficiaryAcctNo = l;
 	}
 	public String getBeneficiaryName() {
 		return beneficiaryName;

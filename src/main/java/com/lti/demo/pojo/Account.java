@@ -7,20 +7,15 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the ACCOUNT database table.
- * 
- */
 @Entity
 @Table
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ACCOUNT_ACCNO_GENERATOR", sequenceName="ACC_NO")
+	@SequenceGenerator(name="ACCOUNT_ACCNO_GENERATOR", sequenceName="ACC_NO",initialValue = 100000000)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ACCOUNT_ACCNO_GENERATOR")
-	@Column(name="ACC_NO")
+	@Column(name="ACC_NO" )
 	private long accNo;
 
 	@Column(name="ACCOUNT_STATUS")
@@ -70,8 +65,7 @@ public class Account implements Serializable {
 
 
 	//bi-directional one-to-one association to User
-	@OneToOne
-	@JoinColumn(name="ACC_NO", referencedColumnName="ACC_NO")
+	@OneToOne(mappedBy="account")
 	private User user;
 	
 	@OneToMany(mappedBy="account")

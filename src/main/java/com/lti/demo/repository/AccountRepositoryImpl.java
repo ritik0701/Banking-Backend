@@ -1,6 +1,7 @@
 package com.lti.demo.repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,11 +55,24 @@ public class AccountRepositoryImpl implements AccountRepository{
 	@Override
 	public void updateBalance(BigDecimal updatedBalance, long accountNumber) {
 		// TODO Auto-generated method stub
-		 entityManager.createNativeQuery("update account set balance= :updatedBalance where u.ACC_NO= :accNumber")
+		 entityManager.createNativeQuery("update account set balance= :updatedBalance where ACC_NO= :accNumber")
 		 .setParameter("updatedBalance", updatedBalance)
-		 .setParameter("accNumber", accountNumber);
+		 .setParameter("accNumber", accountNumber).executeUpdate();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Account> getNewAccounts() {
+		return entityManager.createNativeQuery("select * from Account u where u.account_status = :status").setParameter("status", "Inprogress").getResultList();
+		
+	}
+	
+	@Override
+	@Transactional
+	public void updateAccount(Account account) {
+		entityManager.refresh(account);
+	}
+	
 
 	
 }

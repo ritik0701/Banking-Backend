@@ -1,6 +1,7 @@
 package com.lti.demo.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,10 +28,10 @@ public class AccountController {
 	//PostMapping
 	@RequestMapping(path="/openaccount")
 	@ResponseBody
-	public String openAccount(@RequestBody OpenAccountDTO dto) {
+	public Account openAccount(@RequestBody OpenAccountDTO dto) {
 		Account account = dto.getAccountFromDTO(dto);
 		accountService.openAccountService(account);
-		return "account opened";
+		return account;
 	}
 	
 	@RequestMapping(path="/accountstatus")
@@ -55,6 +56,12 @@ public class AccountController {
 	@ResponseBody
 	public Account getAccountDetails(@RequestBody AccountNumberDTO x) {
 		return accountService.getAccountDetailsService(x.getAccNo());
+	}
+	
+	@RequestMapping(path="/newAccounts")
+	@ResponseBody
+	public List<Account> getNewAccountDetails() {
+		return accountService.getNewAccountDetailsService();
 	}
 	
 	

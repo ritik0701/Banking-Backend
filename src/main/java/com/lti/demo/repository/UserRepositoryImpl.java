@@ -128,5 +128,14 @@ public class UserRepositoryImpl implements UserRepository {
 		
 	}
 	
-	
+	@Override
+	@Transactional
+	public void createUser(User user,long accNo) {
+		String queryString = "Insert into users values(?,?,?,?)";
+		em.createNativeQuery(queryString).
+		setParameter(1, user.getUserId())
+		.setParameter(2, user.getPass())
+		.setParameter(3, accNo)
+		.setParameter(4, user.getTransaction_Password()).executeUpdate();
+	}
 }

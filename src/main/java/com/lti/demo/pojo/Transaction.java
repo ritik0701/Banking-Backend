@@ -25,7 +25,7 @@ public class Transaction implements Serializable {
 	private long transactionId;
 
 	@Column(name="BENEFICIARY_ACCT_NO")
-	private BigDecimal beneficiaryAcctNo;
+	private long beneficiaryAcctNo;
 
 	@Column(name="BENEFICIARY_NAME")
 	private String beneficiaryName;
@@ -58,12 +58,12 @@ public class Transaction implements Serializable {
 		this.transactionId = transactionId;
 	}
 
-	public BigDecimal getBeneficiaryAcctNo() {
+	public long getBeneficiaryAcctNo() {
 		return this.beneficiaryAcctNo;
 	}
 
-	public void setBeneficiaryAcctNo(BigDecimal beneficiaryAcctNo) {
-		this.beneficiaryAcctNo = beneficiaryAcctNo;
+	public void setBeneficiaryAcctNo(long l) {
+		this.beneficiaryAcctNo = l;
 	}
 
 	public String getBeneficiaryName() {

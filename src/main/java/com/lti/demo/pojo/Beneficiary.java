@@ -18,6 +18,8 @@ public class Beneficiary implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(name="Beneficiary_GENERATOR", sequenceName="beneficiaryId")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="Beneficiary_GENERATOR")
 	@Column(name="beneficiary_Id")
 	private long beneficiaryId;
 	

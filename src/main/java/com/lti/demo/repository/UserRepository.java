@@ -16,6 +16,7 @@ public interface UserRepository {
 	boolean resetPassword(Long userId,String updatedPassword);
 	boolean resetTransactionPassword(Long userId,Integer updatedPassword);
 	boolean isUserPresent();
+	void createUser(User user, long accNo);
 
 	
 }

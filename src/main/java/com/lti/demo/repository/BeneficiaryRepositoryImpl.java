@@ -37,6 +37,11 @@ public class BeneficiaryRepositoryImpl implements BeneficiaryRepository {
 		
 	}
 	
+	@Override
+	public Beneficiary getBeneficiary(long beneficiaryId) {
+		return entityManager.find(Beneficiary.class, beneficiaryId);
+	}
+	
 
 }
 

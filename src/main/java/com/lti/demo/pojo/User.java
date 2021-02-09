@@ -27,13 +27,14 @@ public class User implements Serializable {
 
     //bi-directional one-to-one association to Account
     @JsonIgnore
-    @OneToOne(mappedBy="user")
+    @OneToOne
+    @JoinColumn(name="acc_no")
     private Account account;
     
     @Column(name="transaction_Password",nullable=false)
     private Integer transactionPassword;
+    
     @JsonIgnore
-    //bi-directional many-to-one association to Beneficiary
     @OneToMany(mappedBy="user")
     private List<Beneficiary> beneficiaries;
     

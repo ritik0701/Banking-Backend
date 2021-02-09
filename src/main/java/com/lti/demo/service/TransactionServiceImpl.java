@@ -7,13 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lti.demo.dto.MakeTransaction;
+import com.lti.demo.dto.StatusDto;
 import com.lti.demo.dto.TransactionDate;
 import com.lti.demo.dto.TransactionDetailsDTO;
 import com.lti.demo.dto.TransactionFind;
 import com.lti.demo.dto.TransactionMiniStatementDTO;
 import com.lti.demo.exception.ServiceException;
 import com.lti.demo.pojo.Account;
+import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.pojo.Transaction;
+import com.lti.demo.pojo.User;
 import com.lti.demo.repository.AccountRepository;
 import com.lti.demo.repository.BeneficiaryRepository;
 import com.lti.demo.repository.TransactionRepository;
@@ -32,6 +36,7 @@ public class TransactionServiceImpl implements TransactionService {
 	BeneficiaryRepository benrepo;
 	@Autowired
 	UserRepository userrepo;
+	
 	
 	
 	public void DepositeBalance(long toAccount, BigDecimal transactionBalance) {
@@ -83,38 +88,34 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 	@Transactional
 	@Override
-	public void transaction(TransactionDetailsDTO td) {
+	public StatusDto transaction(MakeTransaction mt) throws Exception {
+		try {
 		Transaction t= new Transaction();
-		String ttype;
-		ttype=td.getDbOrCr();
-		if(ttype=="DB"||ttype=="db")
-		{
-			
-			long acno=td.getAccNo();
-			BigDecimal curBalance=balancerepo.getAccountBalance(acno);
-			BigDecimal transactionBalance =td.getTransactionAmount();
-		
-		    WithdrawBalance( acno, transactionBalance); 
+		Beneficiary b = benrepo.getBeneficiary(mt.getBeneficiaryId());
+		if(!b.getUser().getTransaction_Password().equals(mt.getTransactionPassword())) {
+			throw new Exception("Transaction Password Not same");
 		}
-		else{
-			long acno=td.getAccNo();
-			BigDecimal curBalance=balancerepo.getAccountBalance(acno);
-			BigDecimal transactionBalance =td.getTransactionAmount();
-			DepositeBalance(acno,transactionBalance);
-			
+		Account a = b.getUser().getAccount();
+		BigDecimal balance = a.getBalance();
+		if(balance.compareTo(mt.getAmount())<0){
+			throw new ServiceException("Insufficient Funds");
+		}else {
+		balancerepo.updateBalance(balance.subtract(mt.getAmount()), a.getAccNo());
 		}
-		t.setBeneficiaryAcctNo(td.getBeneficiaryAcctNo());
-		t.setBeneficiaryName(td.getBeneficiaryName());
-		t.setDbOrCr(td.getDbOrCr());
-		
-		t.setTransactionAmount(td.getTransactionAmount());
-		
-		t.setTransactionType(td.getTransactionType());
+		t.setBeneficiaryAcctNo(b.getBeneficiaryAccNo());
+		t.setBeneficiaryName(b.getBeneficiaryName());
+		t.setDbOrCr("db");
+		t.setTransactionAmount(mt.getAmount());
+		t.setTransactionType(mt.getTransactionType());
 		t.setTransactionDate(new Date());
-		Account a =new Account();
-		a=balancerepo.getAccountDetails(td.getAccNo());
 		t.setAccount(a);
 		repo.save(t);
+		StatusDto status = new StatusDto();
+		status.setStatus("success");
+		return status;
+		}catch(Exception e){
+			throw e;
+		}
 	}
 	@Override
 	public Transaction findtransaction(TransactionFind tf) {

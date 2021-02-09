@@ -11,5 +11,7 @@ public interface BeneficiaryService {
 	List<Beneficiary> getBeneficiaryNameAndAccNo(long userId);
 
 	void addBeneficiary(AddBeneficiaryDTO benf);
+	
+	com.lti.demo.pojo.Beneficiary getBeneficiary(long beneficiaryId);
 
 }

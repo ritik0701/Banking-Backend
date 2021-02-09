@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.lti.demo.dto.AccountNumberDTO;
 import com.lti.demo.dto.GetUserIdDto;
 import com.lti.demo.dto.LoginUserDto;
 import com.lti.demo.dto.ResetPasswordDto;
@@ -32,20 +32,19 @@ public class UserController
 	
 	@RequestMapping(path="/loginUser")
 	@ResponseBody
-	public StatusDto loginUser(@RequestBody LoginUserDto loginuser)
+	public AccountNumberDTO loginUser(@RequestBody LoginUserDto loginuser) throws Exception
 	{
-		StatusDto status=new StatusDto();
-		if((userserv.loginUser(loginuser.getUserId(), loginuser.getPass()))==false)
+		try {
+		AccountNumberDTO dto=new AccountNumberDTO();
+		if(userserv.loginUser(loginuser.getUserId(), loginuser.getPass()))
 		{
 			
-			 status.setStatus("Invalid credentials!!");
-			
+			 dto.setAccNo(userserv.getAccountNumber(loginuser.getUserId()).getAccNo());
 		}
-		else
-		{
-			status.setStatus("Login Successful!!");
+		return dto;}
+		catch(Exception e) {
+			throw e;
 		}
-		return status;
 		
 	}
 	
@@ -84,5 +83,6 @@ public class UserController
 		return status;
 		
 	}
+	
 	
 }

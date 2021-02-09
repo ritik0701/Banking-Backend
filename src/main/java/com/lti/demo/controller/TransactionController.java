@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.demo.dto.MakeTransaction;
 import com.lti.demo.dto.TransactionDate;
 import com.lti.demo.dto.TransactionDetailsDTO;
 import com.lti.demo.dto.TransactionFind;
 import com.lti.demo.dto.TransactionMiniStatementDTO;
+import com.lti.demo.dto.StatusDto;
 import com.lti.demo.pojo.Transaction;
 import com.lti.demo.service.TransactionService;
 
@@ -52,17 +54,14 @@ public class TransactionController {
 	
 	
 	@PostMapping(path="/addtransaction")
-	public String addTransaction(@RequestBody TransactionDetailsDTO ts) {
-	
+	public StatusDto addTransaction(@RequestBody MakeTransaction mt) throws Exception {
+		
 		try {
-			trans.transaction(ts);
-			
-			return "add sucssessfully";
+			return trans.transaction(mt);
 			
 		} 
 		catch (Exception e) {
-			  e.printStackTrace();
-			  return "Error while transactions";
+			  throw e;
 		}
 	}
 	

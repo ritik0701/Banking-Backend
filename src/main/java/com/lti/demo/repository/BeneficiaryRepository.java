@@ -8,5 +8,6 @@ public interface BeneficiaryRepository {
 	
 	void save(Beneficiary benf);
 	List<Beneficiary> getBeneficiaryList(long userId) ;
+	Beneficiary getBeneficiary(long beneficiaryId);
 	
 }

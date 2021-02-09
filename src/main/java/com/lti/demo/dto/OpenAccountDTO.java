@@ -174,7 +174,7 @@ public class OpenAccountDTO {
 
 	public Account getAccountFromDTO(OpenAccountDTO dto) {
 		Account acc = new Account();
-		acc.setAccountStatus(dto.accountStatus);
+		acc.setAccountStatus("Inprogress");
 		acc.setAddress(dto.address);
 		acc.setAdminRemark(dto.adminRemark);
 		acc.setAnnualIncome(dto.annualIncome);

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.lti.demo.mail.EmailServiceImpl;
 import com.lti.demo.pojo.Account;
 import com.lti.demo.pojo.Beneficiary;
 import com.lti.demo.pojo.User;
@@ -37,16 +38,16 @@ class DarkBankingApplicationTests {
 	@Test
 	void testSetAccountDetails() {
 		Account acc =  new Account();
-		acc.setAccountStatus("open");
+		acc.setAccountStatus("Inprogress");
 		acc.setAddress("kalani nagar");
 		acc.setAdminRemark("insert from account");
 		acc.setAnnualIncome(BigDecimal.valueOf(6767.09));
 		acc.setBalance(BigDecimal.valueOf(634767.09));
 		acc.setCity("Indore");
 		acc.setDob(new Date());
-		acc.setEmail("aadish123@gnail.com");
+		acc.setEmail("16bit042@ietdavv.edu.in");
 		acc.setFather("Mukesh Chhap");
-		acc.setFirstname("Ritik");
+		acc.setFirstname("Sheldon");
 		acc.setLandmark("Near School");
 		acc.setLastname("Jain");
 		acc.setMiddlename(null);
@@ -190,6 +191,7 @@ void isUserPresent()
 			System.out.println("Transaction pass:"+User.getTransaction_Password());
 	}
 	}
+	
 		
 	//AAdish---------------------------------------------------------------------------------------
 	
@@ -199,7 +201,7 @@ void isUserPresent()
 	@Test
 	void getAdmin() {
 		ar.getAdminById((long) 1001);
-		System.out.println("running test : AdminRepo :" +ar);
+		System.out.println("running test : AdminRepo :" +ar.getAdminById((long) 1001).getPass());
 	
 	}
 	
@@ -271,7 +273,7 @@ void isUserPresent()
 		System.out.println("running test : TransRepo : "+ transrepo );
 		Transaction t1 =  new Transaction();
 		t1.setAccount(accountRepo.getAccountDetails(100000000));
-		t1.setBeneficiaryAcctNo(BigDecimal.valueOf(100032002));
+		t1.setBeneficiaryAcctNo(100032002);
 		t1.setBeneficiaryName("Vishal D");
 		t1.setDbOrCr("db");
 		t1.setTransactionAmount(BigDecimal.valueOf(10000.0));
@@ -330,6 +332,15 @@ void isUserPresent()
 	
 	}
 	
+//Mail service testing ----------------------------------------------------
+	
+	@Autowired 
+	EmailServiceImpl emailService;
+	
+	@Test
+	void sendMail() {
+		emailService.sendSimpleMessage("16bit042@ietdavv.edu.in", "Test Email From Java", "Hope U reach there");
 
-
+	}
+	
 }

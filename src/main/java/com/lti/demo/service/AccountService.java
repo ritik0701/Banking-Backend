@@ -1,6 +1,7 @@
 package com.lti.demo.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.lti.demo.pojo.Account;
 
@@ -17,5 +18,7 @@ public interface AccountService {
 	public String isUserValidService(long accountNumber);
 	
 	public Account getAccountDetailsService(long accountNumber);
+
+	List<Account> getNewAccountDetailsService();
 	
 }

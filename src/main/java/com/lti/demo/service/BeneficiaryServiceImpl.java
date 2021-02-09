@@ -37,9 +37,14 @@ public class BeneficiaryServiceImpl implements BeneficiaryService{
 			b.setBeneficiaryAccNo(benf.getBeneficiaryAccNo());
 			b.setBeneficiaryName(benf.getBeneficiaryName());
 			b.setDateAdded(benf.getDateAdded());
-//			b.setUser(u.findUserById(benf.getUserId()));
+			b.setUser(u.findUserById(benf.getUserId()));
 			
 			repo.save(b);
+			
+		}
+		@Override
+		public  Beneficiary getBeneficiary(long beneficiaryId) {
+			return repo.getBeneficiary(beneficiaryId);
 			
 		}
 	}

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.lti.demo.pojo.Account;
 import com.lti.demo.pojo.User;
 import com.lti.demo.repository.UserRepository;
-
+import com.lti.demo.dto.AccountNumberDTO;
 import com.lti.demo.exception.ServiceException;
 
 
@@ -21,21 +21,24 @@ public class UserServiceImpl implements UserService {
 	
 	
 		@Override
-		public Boolean loginUser(Long userId, String password)
+		public Boolean loginUser(Long userId, String password) throws Exception
 		{
-			if((repo.isUserValid(userId))==false)
-			{
-				return false;
-			}
-			else if((repo.validUserIdPassword(userId, password))==false)
-			{
-				return false;
-			}
-			else
-			{
-			return true;
-			}
 			
+				if((repo.isUserValid(userId))==false)
+				
+				{
+					throw new Exception();
+				}
+				else if((repo.validUserIdPassword(userId, password))==false)
+				{
+					throw new Exception();
+				}
+				else
+				{
+				return true;
+				}
+			
+				
 		}
 		
 		
@@ -86,4 +89,30 @@ public class UserServiceImpl implements UserService {
 				throw new ServiceException("Please Register First");
 			}
 		}
+
+
+
+		@Override
+		public AccountNumberDTO getAccountNumber(long userId) {
+			// TODO Auto-generated method stub
+			AccountNumberDTO dto = new AccountNumberDTO();
+			try {
+				
+				dto.setAccNo(repo.findUserById(userId).getAccount().getAccNo());
+			
+			}
+			catch(EmptyResultDataAccessException e) {
+				throw new ServiceException("Please Register First");
+			}
+			return dto;
+		}
+
+
+
+		@Override
+		public void saveUserService(long accNo) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 }
